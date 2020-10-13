@@ -1,19 +1,21 @@
 <?php date_default_timezone_set('Europe/Vilnius'); ?>
 <!DOCTYPE html>
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <title><?php print 'PHP lydės ir ' . date('D', strtotime('+1 day')); ?></title>
+    <title><?php print 'PHP lydės ir ' . date('Y.m.d', strtotime('+' . rand(0, 1000000) . 'days')); ?></title>
 </head>
 
 <body>
     <h1>
         <i>Laurynas</i>
         <span style='font-weight:normal'>
-            - PHP su manin buvo ir <?php print date('h', strtotime('-1 hour')) . ' valandą'; ?>
+            - Galbūt tūrėsiu <?php print rand(1, 5) . ' vaikų(us) !'; ?>
         </span>
     </h1>
-    <p><?php print date('Y', strtotime('+1 year')) . ' ne už kalnų!'; ?></p>
+    <p>
+        D. Trump'as nebebus prezidentas:
+        <?php print date('Y.m.d', strtotime('+' . rand(2, 10) . 'year')); ?>
+    </p>
 </body>
-
-</html>
