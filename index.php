@@ -3,17 +3,17 @@
 
 <head>
     <meta charset="UTF-8">
-    <title><?php print date('D') . ' ir PHP'; ?></title>
+    <title><?php print 'PHP lydės ir ' . date('D', strtotime('+1 day')); ?></title>
 </head>
 
 <body>
     <h1>
         <i>Laurynas</i>
         <span style='font-weight:normal'>
-            - HTML<?php print ' ir PHP' ?> asas jau nuo <?php print date('Y') . ' metų' ?>
+            - PHP su manin buvo ir <?php print date('h', strtotime('-1 hour')) . ' valandą'; ?>
         </span>
     </h1>
-    <p>Viskas prasidėjo <?php print date('M') . ' mėnesio, ' . date('D') . ' dieną!'; ?></p>
+    <p><?php print date('Y', strtotime('+1 year')) . ' ne už kalnų!'; ?></p>
 </body>
 
 </html>
