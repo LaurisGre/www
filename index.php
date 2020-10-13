@@ -2,17 +2,35 @@
 <!DOCTYPE html>
 <html>
 
+<style>
+    body {
+        background-color: rgb(
+                <?php print rand(0, 100); ?>,
+                <?php print rand(0, 100); ?>,
+                <?php print rand(0, 100); ?>)
+    }
+
+    h1 {
+        font-size: <?php print rand(10, 30); ?>px;
+    }
+
+    p {
+        color: rgb(
+            <?php print rand(0, 100); ?>,
+            <?php print rand(0, 100); ?>,
+            <?php print rand(0, 100); ?>)
+    }
+</style>
+
 <head>
     <meta charset="UTF-8">
-    <title><?php print 'PHP lydės ir ' . date('Y.m.d', strtotime('+' . rand(0, 1000000) . 'days')); ?></title>
+    <title><?php print 'PHP lydės ir ' . date('Y.m.d', strtotime('+' . rand(0, 3650) . 'days')); ?></title>
 </head>
 
 <body>
     <h1>
         <i>Laurynas</i>
-        <span style='font-weight:normal'>
-            - Galbūt tūrėsiu <?php print rand(1, 5) . ' vaikų(us) !'; ?>
-        </span>
+        - Galbūt tūrėsiu <?php print rand(1, 5) . ' vaikų(us) !'; ?>
     </h1>
     <p>
         D. Trump'as nebebus prezidentas:
