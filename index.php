@@ -4,22 +4,18 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Cast the Die</title>
+    <title>C4 go brrr</title>
 </head>
 <style>
     body {
-        background-color: rgb(
-            <?php print rand(0, 255) ?>,
-            <?php print rand(0, 255) ?>,
-            <?php print rand(0, 255) ?>);
         height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
+        flex-direction: column;
     }
 
     #die {
-        /* background-color: white; */
         height: 400px;
         width: 400px;
         border: 20px solid black;
@@ -30,57 +26,37 @@
         font-size: 100px;
     }
 
-    .back {
-        background-color: white;
+    #timer {
+        margin-top: 20px;
+        font-size: 30px;
     }
 
-    /* <?php switch (rand(1, 6)) {
-            case 1:
-                print
-                '.back {
-                    background-color: red;
-                }';
-                break;
-            case 2:
-                print 2;
-                break;
-            case 3:
-                print 3;
-                break;
-            case 4:
-                print 4;
-                break;
-            case 5:
-                print 5;
-                break;
-            case 6:
-                print 6;
-                break;
-        } ?> */
-
+    <?php 
+        if (date('s') == 0) {
+            print
+            '.back {
+                background-image: url("https://i.insider.com/5eeb91fd5af6cc61341d2f13?width=1200&format=jpeg");
+                backgroung-size: cover;
+                background-position: center;
+            }';
+        } else {
+            print
+            '.back {
+                background-image: url("https://screenshots.gamebanana.com/img/ico/sprays/4ea33068c0dcc.png");
+                background-position: center;
+                background-repeat: no-repeat;
+            }';
+        }
+    ?>
 </style>
 <body>
     <div id="die" class="back">
-        <?php switch (rand(1, 6)) {
-            case 1:
-                print '<div>1</div>';
-                break;
-            case 2:
-                print '<div>2</div>';
-                break;
-            case 3:
-                print '<div>3</div>';
-                break;
-            case 4:
-                print '<div>4</div>';
-                break;
-            case 5:
-                print '<div>5</div>';
-                break;
-            case 6:
-                print '<div>6</div>';
-                break;
-        } ?>
+        
+    </div>
+    <div id="timer">
+        <?php 
+            print date('s');
+        ?>
     </div>
 </body>
 
