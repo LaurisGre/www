@@ -7,7 +7,7 @@
 </head>
 <body>
     <h1>
-        <b><i>Laurynas</i></b>
+        <i>Laurynas</i>
         <span style="font-weight:normal"> - HTML asas!</span>
     </h1>
     <p>Moku kurti statinį turinį.</p>
