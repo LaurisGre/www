@@ -1,8 +1,5 @@
 <?php 
-    $string = 'stringas';
-    $integer = 7;
-    $boolean = false;
-    $null = null;
+    $source = 'https://screenshots.gamebanana.com/img/ico/sprays/4ea33068c0dcc.png';
 ?>
 
 <!DOCTYPE html>
@@ -14,12 +11,10 @@
 </head>
 
 <body>
-    <ul>
-        <li>String tipas: <?php print $string; ?></li>
-        <li>Integer tipas: <?php print $integer; ?></li>
-        <li>Boolean tipas: <?php print $boolean; ?></li>
-        <li>Null tipas: <?php print $null; ?></li>
-    </ul>
+    <img src="<?php print $source; ?>">
+    <img src="<?php print $source; ?>">
+    <img src="<?php print $source; ?>">
+    <img src="<?php print $source; ?>">
 </body>
 
 </html>
