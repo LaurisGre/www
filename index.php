@@ -1,18 +1,29 @@
 <?php 
-    $distane = rand(50, 200);
-    $consumption = 7.5;
-    $price_1 = 1.3;
-    $my_money = 15;
+    $return_late = rand(0, 1);
+    $return_drunk = rand(0, 1);
 
-    $fuel_used = $distane * $consumption / 100;
-    $price_for_fuel = $fuel_used * $price_1;
-    $price_for_fuel_f = number_format($price_for_fuel, 2);
+    // if($return_late && $return_drunk) {
+    //     $return = 'grįžai vėlai ir išgėręs';
+    // } else if ($return_late) {
+    //     $return = 'grįžai vėlai';
+    // } else if ($return_drunk) {
+    //     $return = 'grįžai išgėręs';
+    // } else if (!$return_late && !$return_drunk) {
+    //     $return = 'nieko napadarei';
+    // }
 
-    if($price_for_fuel_f > $my_money) {
-        $answer = 'not enough cash';
+    if($return_late) {
+        if($return_drunk) {
+            $return = 'grįžai vėlai ir išgėręs';
+        } else {
+            $return = 'grįžai vėlai';
+        }
+    } else if($return_drunk) {
+        $return = 'grįžai išgėręs';
     } else {
-        $answer = 'you have enough cash';
+        $return = 'grįžai normaliai';
     }
+
 ?>
 
 <!DOCTYPE html>
@@ -24,14 +35,9 @@
 </head>
 
 <body>
-    <h1>Kelionės skaičiuoklė</h1>
-    <ul>
-        <li>Nuvažiuota distancija: <?php print $distane ?> km.</li>
-        <li>Sunaudota <?php print $fuel_used ?> l. kuro</li>
-        <li>Kaina: <?php print $price_for_fuel_f ?> piginų</li>
-        <li>Cash: <?php print $my_money ?> piginų</li>
-        <li><?php print $answer; ?></li>
-    </ul>
+    <h1>Buitinė skaičiuoklė</h1>
+    <h2><?php print $return_late . $return_drunk; ?></h2>
+    <h2><?php print $return; ?></h2>
 </body>
 
 </html>
