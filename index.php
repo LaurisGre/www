@@ -1,39 +1,25 @@
-<?php date_default_timezone_set('Europe/Vilnius'); ?>
+<?php 
+    $string = 'stringas';
+    $integer = 7;
+    $boolean = false;
+    $null = null;
+?>
+
 <!DOCTYPE html>
 <html>
 
-<style>
-    body {
-        background-color: rgb(
-                <?php print rand(0, 100); ?>,
-                <?php print rand(0, 100); ?>,
-                <?php print rand(0, 100); ?>)
-    }
-
-    h1 {
-        font-size: <?php print rand(10, 30); ?>px;
-    }
-
-    p {
-        color: rgb(
-            <?php print rand(0, 100); ?>,
-            <?php print rand(0, 100); ?>,
-            <?php print rand(0, 100); ?>)
-    }
-</style>
-
 <head>
     <meta charset="UTF-8">
-    <title><?php print 'PHP lydės ir ' . date('Y.m.d', strtotime('+' . rand(0, 3650) . 'days')); ?></title>
+    <title><?php print 'Variables'; ?></title>
 </head>
 
 <body>
-    <h1>
-        <i>Laurynas</i>
-        - Galbūt tūrėsiu <?php print rand(1, 5) . ' vaikų(us) !'; ?>
-    </h1>
-    <p>
-        D. Trump'as nebebus prezidentas:
-        <?php print date('Y.m.d', strtotime('+' . rand(2, 10) . 'year')); ?>
-    </p>
+    <ul>
+        <li>String tipas: <?php print $string; ?></li>
+        <li>Integer tipas: <?php print $integer; ?></li>
+        <li>Boolean tipas: <?php print $boolean; ?></li>
+        <li>Null tipas: <?php print $null; ?></li>
+    </ul>
 </body>
+
+</html>
