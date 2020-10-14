@@ -1,10 +1,18 @@
 <?php 
-    $bin_volume = 40;
-    $bin_heap_volume = rand(0, 20);
-    $trash_total_volume = $bin_volume + $bin_heap_volume;
-    $trash_per_day = 15;
-    $trash_full_in_days = $trash_total_volume / $trash_per_day;
-    $do_nothing_for_days = ($trash_total_volume - $trash_total_volume % $trash_per_day) / $trash_per_day;
+    $distane = rand(50, 200);
+    $consumption = 7.5;
+    $price_1 = 1.3;
+    $my_money = 15;
+
+    $fuel_used = $distane * $consumption / 100;
+    $price_for_fuel = $fuel_used * $price_1;
+    $price_for_fuel_f = number_format($price_for_fuel, 2);
+
+    if($price_for_fuel_f > $my_money) {
+        $answer = 'not enough cash';
+    } else {
+        $answer = 'you have enough cash';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -16,10 +24,14 @@
 </head>
 
 <body>
-    <h1> the trash bin will be filled in <?php print $trash_full_in_days; ?> days</h1>
-    <p>The bins capacity is <?php print $bin_volume; ?> liters</p>
-    <p>The wife is fine until the trash doesn't reach <?php print $bin_heap_volume; ?> liters over the bin's capacity</p>
-    <h3>I can do nothing for <?php print $do_nothing_for_days; ?> days</h3>
+    <h1>Kelionės skaičiuoklė</h1>
+    <ul>
+        <li>Nuvažiuota distancija: <?php print $distane ?> km.</li>
+        <li>Sunaudota <?php print $fuel_used ?> l. kuro</li>
+        <li>Kaina: <?php print $price_for_fuel_f ?> piginų</li>
+        <li>Cash: <?php print $my_money ?> piginų</li>
+        <li><?php print $answer; ?></li>
+    </ul>
 </body>
 
 </html>
