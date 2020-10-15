@@ -1,13 +1,22 @@
 <?php
+    //apskaičiuojamas likęs laikas iki 5 minučių intervalo pabaigos; rezultatas gaunamas sekundėmis.
     $joint_timer = 300 - (date('i') % 5 * 60 + date('s'));
+    
+    //iš gauto laiko paskaičiuojamas minučių skaičius.
     $joint_minutes = ($joint_timer - $joint_timer % 60) / 60;
+
+    //ir sekundžių skaičius; if'as prideda '0' prie vienženklių skaičių.
     if ($joint_timer % 60 >= 10 ) {
         $joint_seconds = $joint_timer % 60;
     } else {
         $joint_seconds = '0' . $joint_timer % 60;
     }
 
-    $joint_percent = date('i') % 5 * 20 + 20 * date('s') / 60;
+    //apskaičiojamas likęs laikas iki 5 minučių intervalo galo pabaigos; rezultatas gaunamas procentais.
+    //pirma dalis (iki pliuso) paskaičiuoja procentus pagal minutės vertę, po pliuso paskaičiuoja procentus pagal sekundės.
+    // $joint_percent = date('i') % 5 * 20 + 20 * date('s') / 60;
+    $joint_percent = (1 - $joint_timer / 300) * 100;
+
 ?>
 
 <!DOCTYPE html>
