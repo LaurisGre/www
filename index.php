@@ -1,33 +1,57 @@
 <?php
-    $months = 24;
-    $car_price_new = 30000;
-    $depreciation = 2;
-    $car_price_used2 = 30000;
+    $my_memories = [
+        'Taksi',
+        'Baras',
+        'Klubas',
+        'Baras vel',
+        'Klubas',
+        '???',
+        'Namai',
+    ];
 
-    for ($i = 0; $i <= 24; $i++) {
-        $car_price_used = $car_price_new * ((100 - $depreciation) / 100) ** $i;
-        // $car_price_used2 *= ((100 - $depreciation) / 100);
+    $friends_memories = [
+        'Taksi',
+        'Baras',
+        'Klubas',
+        'Baras vel',
+        'Casino',
+        'Mentai',
+        'Narvelis',
+    ];
+
+    $rand_memory = rand(0, count($my_memories) - 1);
+    $h3 = "Flashback $rand_memory : $my_memories[$rand_memory]";
+
+    $common_memories = [];
+
+    foreach($my_memories as $my_memory) {
+        if (in_array($my_memory, $friends_memories) && !in_array($my_memory, $common_memories)) {
+            $common_memories[] = $my_memory;
+        }
     }
-    $car_price_used_f = number_format($car_price_used, 2);
-    $depr_perc = number_format(100 - $car_price_used * 100 / $car_price_new, 2);
-    $h2 = "Naujos mašinos kaina: $car_price_new eur";
-    $h3 = "Po $months mėn, mašinos vertė bus: $car_price_used_f eur";
-    // $h33 = "Po $months mėn, mašinos vertė bus: $car_price_used2 eur";
-    $h4 = "Mašina nuvertės $depr_perc proc.";
+
+    var_dump($common_memories);
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
-    <style>
-    </style>
+    <title>Memories</title>
 </head>
 <body>
-    <h1>Kiek nuvertės mašina?</h1>
-    <h2><?php print $h2; ?></h2>
+    <h1>Kas buvo penktadienį</h1>
+    <h2>Mano prisiminimai:</h2>
+    <ul>
+        <?php foreach($my_memories as $memory): ?>
+            <li><?php print $memory; ?></li>
+        <?php endforeach; ?>
+    </ul>
     <h3><?php print $h3; ?></h3>
-    <!-- <h3><?php print $h33; ?></h2> -->
-    <h4><?php print $h4; ?></h4>
+    <h3>Draugo prisiminimai:</h3>
+    <ul>
+        <?php foreach($friends_memories as $friends_memory): ?>
+            <li><?php print $friends_memory; ?></li>
+        <?php endforeach; ?>
+    </ul>
 </body>
 </html>
