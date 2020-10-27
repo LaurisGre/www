@@ -1,41 +1,51 @@
 <?php
-    $rasinys = [];
-    $p = '';
-    $random_length = rand (20, 40);
+$police_report = [
+    [
+        'subject' => 'Domantas',
+        'reason' => 'Public urination',
+        'amount' => rand(-200, 200),
+    ],
+    [
+        'subject' => 'Romantas',
+        'reason' => 'Not wearing a mask',
+        'amount' => rand(-200, 200),
+    ],
+    [
+        'subject' => 'Bobantas',
+        'reason' => 'Vote bribery',
+        'amount' => rand(-200, 200),
+    ],
+];
 
-    $zodziai = [
-        'jonas',
-        'petras',
-        'ejo',
-        'bego',
-        'sauke',
-        'gere',
-        'namas',
-        'norfa',
-        'po',
-        'ant',
-    ];
-
-    for($i = 0; $i < $random_length; $i++) {
-        $random_word = rand(0, count($zodziai) - 1);
-        $rasinys[] = $zodziai[ $random_word];
-    }
-
-    foreach($rasinys as $word) {
-        $p .= "$word ";
-    }
+foreach($police_report as $key => $report) {
+    $warning_chance = rand(0, 1);
+    $police_report[$key]['warning_only'] = $warning_chance ? true : false;
+    $police_report[$key]['css_class'] = $report['amount'] > 0 ? 'profit' : 'expense';
+    $police_report[$key]['rep'] = $report['subject'] . ' (' . $report['reason'] .') - ' . ($police_report[$key]['warning_only'] ? 'warning' : '$' . $report['amount']);
+}
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Story Time</title>
+    <title>Police Report</title>
+    <style>
+        .profit {
+            color: lawngreen;
+        }
+
+        .expense {
+            color: red;
+        }
+    </style>
 </head>
 <body>
-<h1>Lietuvių egzaminas</h1>
-<p>
-    <?php print $p; ?>
-</p>
+    <h1>Policijos išrašas</h1>
+    <ul>
+        <?php foreach($police_report as $report): ?>
+            <li class="<?php print $report['css_class'] ?>"><?php print $report['rep'] ?></li>
+        <?php endforeach; ?>
+    </ul>
 </body>
 </html>
