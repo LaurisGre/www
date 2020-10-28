@@ -1,51 +1,53 @@
 <?php
-$police_report = [
-    [
-        'subject' => 'Domantas',
-        'reason' => 'Public urination',
-        'amount' => rand(-200, 200),
-    ],
-    [
-        'subject' => 'Romantas',
-        'reason' => 'Not wearing a mask',
-        'amount' => rand(-200, 200),
-    ],
-    [
-        'subject' => 'Bobantas',
-        'reason' => 'Vote bribery',
-        'amount' => rand(-200, 200),
-    ],
-];
+$x = rand(0, 100);
+$y = rand(0, 100);
 
-foreach($police_report as $key => $report) {
-    $warning_chance = rand(0, 1);
-    $police_report[$key]['warning_only'] = $warning_chance ? true : false;
-    $police_report[$key]['css_class'] = $report['amount'] > 0 ? 'profit' : 'expense';
-    $police_report[$key]['rep'] = $report['subject'] . ' (' . $report['reason'] .') - ' . ($police_report[$key]['warning_only'] ? 'warning' : '$' . $report['amount']);
+function is_prime($num) {
+    if ($num === 1) {
+        return false;
+    }
+
+    for ($i = 2 ; $i < $num / 2; $i++) {
+        if($num % $i == 0) {
+            return false;
+        }
+    }
+
+    return true;
 }
+
+function generate_answer($num) {
+    if (is_prime($num)) {
+        return "$num yra pirminis skaicius";
+    } else {
+        return "$num nera pirminis skaicius"; 
+    }
+}
+
+function sum_if_prime($num1, $num2) {
+    if (is_prime($num1) && is_prime($num2)) {
+        $sum = $num1 + $num2;
+        return "Pirminiu skaiciu suma: $sum";
+    } else {
+        return "Vienas is skaiciu nera pirminis";
+    }
+}
+
+$answer1 = generate_answer($x);
+$answer2 = generate_answer($y);
+$answer3 =  sum_if_prime($x, $y);
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Police Report</title>
-    <style>
-        .profit {
-            color: lawngreen;
-        }
-
-        .expense {
-            color: red;
-        }
-    </style>
+    <title>Prime</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Policijos išrašas</h1>
-    <ul>
-        <?php foreach($police_report as $report): ?>
-            <li class="<?php print $report['css_class'] ?>"><?php print $report['rep'] ?></li>
-        <?php endforeach; ?>
-    </ul>
+    <p><?php print $answer1; ?></p>
+    <p><?php print $answer2; ?></p>
+    <p><?php print $answer3; ?></p>
 </body>
 </html>
