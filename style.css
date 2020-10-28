@@ -11,3 +11,27 @@ body {
     align-items: center;
     flex-direction: column;
 }
+
+.matrix_box {
+    display: flex;
+    flex-wrap: wrap;
+    width: 130px;
+}
+
+.row {
+    display: flex;
+}
+
+.square {
+    height: 40px;
+    width: 40px;
+    margin: 5px;
+}
+
+.blue {
+    background-color: deepskyblue;
+}
+
+.gold {
+    background-color: gold;
+}

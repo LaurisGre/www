@@ -1,53 +1,54 @@
 <?php
-$x = rand(0, 100);
-$y = rand(0, 100);
 
-function is_prime($num) {
-    if ($num === 1) {
-        return false;
+function generate_matrix($size) {
+    $new_matrix = [];
+    for($i = 0 ; $i < $size ; $i++) {
+        $new_row = [];
+        for($u = 0 ; $u < $size ; $u++) {
+            $new_row[] = rand(0, 1);
+        }
+        $new_matrix[] = $new_row;
     }
+    return $new_matrix;
+}
 
-    for ($i = 2 ; $i < $num / 2; $i++) {
-        if($num % $i == 0) {
-            return false;
+$matrix = generate_matrix(rand(2, 3));
+
+function get_winning_rows($mat) {
+    $winning_rows = [];
+    foreach($mat as $key => $row) {
+        if(count(array_unique($row)) === 1){
+            $winning_rows[] = $key;
         }
     }
-
-    return true;
+    return $winning_rows;
 }
 
-function generate_answer($num) {
-    if (is_prime($num)) {
-        return "$num yra pirminis skaicius";
-    } else {
-        return "$num nera pirminis skaicius"; 
-    }
-}
-
-function sum_if_prime($num1, $num2) {
-    if (is_prime($num1) && is_prime($num2)) {
-        $sum = $num1 + $num2;
-        return "Pirminiu skaiciu suma: $sum";
-    } else {
-        return "Vienas is skaiciu nera pirminis";
-    }
-}
-
-$answer1 = generate_answer($x);
-$answer2 = generate_answer($y);
-$answer3 =  sum_if_prime($x, $y);
+$winners = get_winning_rows($matrix);
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Prime</title>
     <link rel="stylesheet" href="style.css">
+    <title>Motrix</title>
 </head>
 <body>
-    <p><?php print $answer1; ?></p>
-    <p><?php print $answer2; ?></p>
-    <p><?php print $answer3; ?></p>
+    <article class='matrix_box'>
+        <?php foreach($matrix as $row): ?>
+            <section class="row">   
+                <?php foreach($row as $square): ?>
+                    <div class='square <?php print $square ? 'gold' : 'blue'; ?>'></div>
+                <?php endforeach; ?>
+            </section>
+        <?php endforeach; ?>
+    </article>
+    <article>
+        <section>Winning rows:</section>
+        <?php foreach($winners as $row): ?>
+            <p><?php print $row; ?></p>
+        <?php endforeach; ?>
+    </article>
 </body>
 </html>
