@@ -12,7 +12,7 @@ function generate_matrix($size) {
     return $new_matrix;
 }
 
-$matrix = generate_matrix(rand(2, 3));
+$matrix = generate_matrix(8);
 
 function get_winning_rows($mat) {
     $winning_rows = [];
@@ -36,8 +36,8 @@ $winners = get_winning_rows($matrix);
 </head>
 <body>
     <article class='matrix_box'>
-        <?php foreach($matrix as $row): ?>
-            <section class="row">   
+        <?php foreach($matrix as $key => $row): ?>
+            <section class="row <?php if (in_array($key, $winners)) print 'winner'; ?>">   
                 <?php foreach($row as $square): ?>
                     <div class='square <?php print $square ? 'gold' : 'blue'; ?>'></div>
                 <?php endforeach; ?>
@@ -47,7 +47,7 @@ $winners = get_winning_rows($matrix);
     <article>
         <section>Winning rows:</section>
         <?php foreach($winners as $row): ?>
-            <p><?php print $row; ?></p>
+            <p><?php print ($row +1 ); ?></p>
         <?php endforeach; ?>
     </article>
 </body>

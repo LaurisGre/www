@@ -15,7 +15,8 @@ body {
 .matrix_box {
     display: flex;
     flex-wrap: wrap;
-    width: 130px;
+    justify-content: center;
+    width: 200px;
 }
 
 .row {
@@ -34,4 +35,8 @@ body {
 
 .gold {
     background-color: gold;
+}
+
+.winner {
+    border: 2px solid red;
 }
