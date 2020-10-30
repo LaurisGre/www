@@ -1,51 +1,43 @@
 <?php
-
-function print_array($data) {
-    $string = '';
-    if (gettype($data) != 'array') {
-        $string .= $data . '.';
-    } else {
-        foreach($data as $value) {
-            $string .= print_array($value);
-            // var_dump($string);
-        }
-    }
-    var_dump($string);
-    if($string[-1] === '.') {
-        $string .= ',';
-    }
-    return $string;
-}
-
-$arr5 = [
-    'stringas',
-    'vardas' => [
-        'stringas',
-        'dar viena verte' => [
-            1,
-            2,
-            4,
-            'random' => [
-                'veikia?'
-            ]
-        ]
-    ],
-    1000
+$arr = [
+    'A', 'A', 'A', 'A',
+    'B', 'B', 'B',
+    'C', 'C',
 ];
 
-$test_array = print_array($arr5);
-var_dump($test_array);
+function count_values(array $array, string $value)
+{
+    $count = 0;
+    foreach ($array as $val) {
+        if ($val === $value) $count++;
+    }
 
+    return $count;
+}
+
+function change_values(array &$array, string $from, string $to) {
+    foreach ($array as $index => $val) {
+        if ($val === $from) $array[$index] = $to;
+    }
+}
+
+var_dump(count_values($arr, 'A'));
+change_values($arr, 'A', 'a');
+var_dump(count_values($arr, 'A'));
+var_dump(count_values($arr, 'a'));
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <title>Motrix</title>
+    <title>Reference</title>
 </head>
+
 <body>
 
 </body>
+
 </html>
