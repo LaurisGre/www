@@ -1,43 +1,36 @@
 <?php
-$arr = [
-    'A', 'A', 'A', 'A',
-    'B', 'B', 'B',
-    'C', 'C',
-];
 
-function count_values(array $array, string $value)
-{
-    $count = 0;
-    foreach ($array as $val) {
-        if ($val === $value) $count++;
-    }
+$atsakymas = '';
 
-    return $count;
-}
-
-function change_values(array &$array, string $from, string $to) {
-    foreach ($array as $index => $val) {
-        if ($val === $from) $array[$index] = $to;
+if (isset($_POST['number'])) {
+    switch ($_POST['button']) {
+        case 'square':
+            $atsakymas = $_POST['number'] ** 2;
+            break;
+        case 'cube':
+            $atsakymas = $_POST['number'] ** 3;
+            break;
+        case 'root':
+            $atsakymas = sqrt($_POST['number']);
+            break;
     }
 }
-
-var_dump(count_values($arr, 'A'));
-change_values($arr, 'A', 'a');
-var_dump(count_values($arr, 'A'));
-var_dump(count_values($arr, 'a'));
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
-    <title>Reference</title>
+    <title>Form</title>
 </head>
-
 <body>
-
+    <h1><?php print $atsakymas; ?></h1>
+    <form method="POST">
+        <input type="number" name='number'>
+        <input type="submit" name="button" value='square'>
+        <input type="submit" name='button' value='cube'>
+        <input type="submit" name="button" value='root'>
+    </form>
 </body>
-
 </html>
