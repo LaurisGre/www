@@ -11,3 +11,33 @@ body {
     align-items: center;
     flex-direction: column;
 }
+form {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+.form_hide {
+    display: none;
+}
+
+input {
+    padding: 5px;
+    margin: 5px;
+}
+
+p {
+    margin: 5px;
+}
+
+.certificate {
+    display: none;
+    height: 200px;
+    width: 200px;
+    background-image: url('https://cttgraphics.com/wp-content/uploads/2018/06/71lJGQ52tTL._SL1000_.jpg');
+    background-size: contain;
+}
+
+.cert_show {
+    display: block;
+}
