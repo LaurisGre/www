@@ -1,13 +1,17 @@
 <?php
 
 require './functions/html.php';
+require './functions/form.php';
+require './functions/validators.php';
 
 $form = [
 	'fields' => [
 		'email' => [
 			'label' => 'Email',
 			'type' => 'text',
-			'value' => 'email@email.com',
+			'validators' => [
+				'validate_field_not_empty',
+			],
 			'extras' => [
 				'attr' => [
 					'placeholder' => 'Aurimas',
@@ -18,6 +22,9 @@ $form = [
 		'password' => [
 			'label' => 'Password',
 			'type' => 'password',
+			'validators' => [
+				'validate_field_not_empty',
+			],
 			'extras' => [
 				'attr' => [
 					'placeholder' => 'Your password',
@@ -48,17 +55,24 @@ $form = [
 	],
 ];
 
-function get_clean_input($arr)
-{
-	$params = [];
-	foreach ($arr as $index => $input) {
-		$params[$index] = FILTER_SANITIZE_SPECIAL_CHARS;
-	}
+$clean_inputs = get_clean_input($form);
 
-	return filter_input_array(INPUT_POST, $params);
+function validate_form(array &$form, array $form_values): bool
+{	
+	$valid = true;
+	foreach ($form['fields'] as $index => $field) {
+		foreach ($field['validators'] ?? [] as $val_func) {
+			if (!($val_func($form_values[$index], $form['fields'][$index]))) {
+				$valid = false;
+			}
+		}
+	}
+	return $valid;
 }
 
-$clean_inputs = get_clean_input($form);
+if ($clean_inputs) {
+	validate_form($form, $clean_inputs);
+}
 
 ?>
 <!DOCTYPE html>
@@ -72,12 +86,21 @@ $clean_inputs = get_clean_input($form);
 
 <body>
 	<form method="POST">
-		<!-- <?php foreach ($form['fields'] as $field) : ?>
-			<input <?php print html_attr($field); ?>>
+		<?php foreach ($form['fields'] as $input_name => $input) : ?>
+			<label for="">
+				<span><?php print $input['label']; ?></span>
+				<input <?php print input_attr($input_name, $input); ?>>
+				<?php if (isset($input['error'])) : ?>
+					<p class="error"><?php print $input['error']; ?></p>
+				<?php endif; ?>
+			</label>
 		<?php endforeach; ?>
-		<?php foreach ($form['buttons'] as $button) : ?>
-			<input <?php print html_attr($button); ?>>
-		<?php endforeach; ?> -->
+
+		<?php foreach ($form['buttons'] as $button_id => $button) : ?>
+			<button <?php print button_attr($button_id, $button); ?>>
+				<?php print $button['title']; ?>
+			</button>
+		<?php endforeach; ?>
 	</form>
 </body>
 
