@@ -1,10 +1,11 @@
 <?php
 
-require './functions/html.php';
-require './functions/form.php';
-require './functions/validators.php';
+require '../bootloader.php';
 
 $form = [
+	'attr' => [
+		'method' => 'POST',
+	],
 	'fields' => [
 		'email' => [
 			'label' => 'Email',
@@ -58,7 +59,7 @@ $form = [
 $clean_inputs = get_clean_input($form);
 
 function validate_form(array &$form, array $form_values): bool
-{	
+{
 	$valid = true;
 	foreach ($form['fields'] as $index => $field) {
 		foreach ($field['validators'] ?? [] as $val_func) {
@@ -74,6 +75,8 @@ if ($clean_inputs) {
 	validate_form($form, $clean_inputs);
 }
 
+var_dump($_POST);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,23 +88,7 @@ if ($clean_inputs) {
 </head>
 
 <body>
-	<form method="POST">
-		<?php foreach ($form['fields'] as $input_name => $input) : ?>
-			<label for="">
-				<span><?php print $input['label']; ?></span>
-				<input <?php print input_attr($input_name, $input); ?>>
-				<?php if (isset($input['error'])) : ?>
-					<p class="error"><?php print $input['error']; ?></p>
-				<?php endif; ?>
-			</label>
-		<?php endforeach; ?>
-
-		<?php foreach ($form['buttons'] as $button_id => $button) : ?>
-			<button <?php print button_attr($button_id, $button); ?>>
-				<?php print $button['title']; ?>
-			</button>
-		<?php endforeach; ?>
-	</form>
+	<?php require ROOT . '/core/templates/form.tpl.php' ?>
 </body>
 
 </html>
