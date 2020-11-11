@@ -7,38 +7,75 @@ $form = [
 		'method' => 'POST',
 	],
 	'fields' => [
-		'name' => [
-			'label' => '',
+		'text1' => [
+			'label' => 'FIRST STRING',
 			'type' => 'text',
 			'validators' => [
 				'validate_field_not_empty',
-				'validate_space',
+				'validate_text_length' => [
+					'min' => 0,
+					'max' => 5,
+				],
 			],
 			'extras' => [
 				'attr' => [
-					'placeholder' => 'Name and Surname',
+					'placeholder' => '',
 					'class' => 'input-field',
 				],
 			],
 		],
-		'age' => [
-			'label' => '',
-			'type' => 'number',
+		'text2' => [
+			'label' => 'SECOND STRING',
+			'type' => 'text',
 			'validators' => [
 				'validate_field_not_empty',
-				'validate_age',
+				'validate_text_length' => [
+					'min' => 0,
+					'max' => 5,
+				],
 			],
 			'extras' => [
 				'attr' => [
-					'placeholder' => 'Age',
+					'placeholder' => '',
+					'class' => 'input-field',
+				],
+			],
+		],
+		'text3' => [
+			'label' => 'THIRD STRING',
+			'type' => 'text',
+			'validators' => [
+				'validate_field_not_empty',
+				'validate_text_length' => [
+					'min' => 0,
+					'max' => 5,
+				],
+			],
+			'extras' => [
+				'attr' => [
+					'placeholder' => '',
+					'class' => 'input-field',
+				],
+			],
+		],
+		'phone_number' => [
+			'label' => 'Enter phone number +3706XXXXXXX',
+			'type' => 'text',
+			'validators' => [
+				'validate_field_not_empty',
+				'validate_phone',
+			],
+			'extras' => [
+				'attr' => [
+					'placeholder' => '',
 					'class' => 'input-field',
 				],
 			],
 		],
 	],
 	'buttons' => [
-		'norm' => [
-			'title' => 'Am I normal?',
+		'submit' => [
+			'title' => 'Numbers?',
 			'type' => 'submit',
 			'extras' => [
 				'attr' => [
@@ -47,6 +84,13 @@ $form = [
 			],
 		],
 	],
+	'validators' => [
+		'validate_field_match' => [
+			'text1',
+			'text2',
+			'text3',
+		]
+	]
 ];
 
 var_dump($_POST);
@@ -54,9 +98,7 @@ var_dump($_POST);
 $clean_inputs = get_clean_input($form);
 
 if ($clean_inputs) {
-	validate_form($form, $clean_inputs) ?
-		var_dump('NORMALUS') :
-		var_dump('NENORMALUS');
+	$message = validate_form($form, $clean_inputs) ? 'NICE MATCH' : 'NOT NICE';
 }
 
 ?>
@@ -71,6 +113,9 @@ if ($clean_inputs) {
 
 <body>
 	<?php require ROOT . '/core/templates/form.tpl.php'; ?>
+	<?php if (isset($message)) : ?>
+		<p><?php print $message; ?></p>
+	<?php endif; ?>
 </body>
 
 </html>
