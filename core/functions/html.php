@@ -11,7 +11,7 @@ function html_attr(array $attr): string
 
 function form_attr($form)
 {
-	$defaults = ['METHOD' => 'POST'];
+	$defaults = ['method' => 'POST'];
 	return html_attr(($form['attr'] ?? []) + $defaults);
 }
 
@@ -21,7 +21,7 @@ function input_attr(string $field_name, array $field): string
 		'name' => $field_name,
 		'type' => $field['type'],
 		'value' => $field['value'] ?? ''
-	] + ($field['extra']['attr'] ?? []);
+	] + ($field['extras']['attr'] ?? []);
 
 	return html_attr($att_arr);
 }
@@ -32,7 +32,7 @@ function button_attr(string $button_id, array $button): string
 		'name' => 'action',
 		'type' => $button['type'] ?? 'submit',
 		'value' => $button_id,
-	] + ($button['extra']['attr'] ?? []);
+	] + ($button['extras']['attr'] ?? []);
 
 	return html_attr($attributes);
 }

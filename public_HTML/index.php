@@ -7,46 +7,39 @@ $form = [
 		'method' => 'POST',
 	],
 	'fields' => [
-		'email' => [
-			'label' => 'Email',
+		'name' => [
+			'label' => '',
 			'type' => 'text',
 			'validators' => [
 				'validate_field_not_empty',
+				'validate_space',
 			],
 			'extras' => [
 				'attr' => [
-					'placeholder' => 'Aurimas',
+					'placeholder' => 'Name and Surname',
 					'class' => 'input-field',
 				],
 			],
 		],
-		'password' => [
-			'label' => 'Password',
-			'type' => 'password',
+		'age' => [
+			'label' => '',
+			'type' => 'number',
 			'validators' => [
 				'validate_field_not_empty',
+				'validate_age',
 			],
 			'extras' => [
 				'attr' => [
-					'placeholder' => 'Your password',
+					'placeholder' => 'Age',
 					'class' => 'input-field',
 				],
 			],
 		],
 	],
 	'buttons' => [
-		'login' => [
-			'title' => 'Log in',
+		'norm' => [
+			'title' => 'Am I normal?',
 			'type' => 'submit',
-			'extras' => [
-				'attr' => [
-					'class' => 'btn',
-				],
-			],
-		],
-		'clear' => [
-			'title' => 'Clear',
-			'type' => 'clear',
 			'extras' => [
 				'attr' => [
 					'class' => 'btn',
@@ -56,26 +49,15 @@ $form = [
 	],
 ];
 
+var_dump($_POST);
+
 $clean_inputs = get_clean_input($form);
 
-function validate_form(array &$form, array $form_values): bool
-{
-	$valid = true;
-	foreach ($form['fields'] as $index => $field) {
-		foreach ($field['validators'] ?? [] as $val_func) {
-			if (!($val_func($form_values[$index], $form['fields'][$index]))) {
-				$valid = false;
-			}
-		}
-	}
-	return $valid;
-}
-
 if ($clean_inputs) {
-	validate_form($form, $clean_inputs);
+	validate_form($form, $clean_inputs) ?
+		var_dump('NORMALUS') :
+		var_dump('NENORMALUS');
 }
-
-var_dump($_POST);
 
 ?>
 <!DOCTYPE html>
@@ -88,7 +70,7 @@ var_dump($_POST);
 </head>
 
 <body>
-	<?php require ROOT . '/core/templates/form.tpl.php' ?>
+	<?php require ROOT . '/core/templates/form.tpl.php'; ?>
 </body>
 
 </html>
