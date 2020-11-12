@@ -31,14 +31,6 @@ function validate_age(string $field_value, array &$field): bool
 	return true;
 }
 
-/**
- * Checks if the provided number is in the specified range
- *
- * @param string $field_value
- * @param array $field
- * @param array $params
- * @return boolean
- */
 function validate_field_range(string $field_value, array &$field, array $params): bool
 {
 	if ($field_value < $params['min'] || $field_value > $params['max']) {
@@ -47,20 +39,13 @@ function validate_field_range(string $field_value, array &$field, array $params)
 	}
 	return true;
 }
-/**
- * Checks if the provided inputs are the same
- *
- * @param array $field_values
- * @param array $form
- * @param array $params
- * @return boolean
- */
+
 function validate_field_match(array $field_values, array &$form, array $params): bool
 {
-	for ($i = 0; $i < count($params); $i++) {
-		if (!($field_values[$params[0]] === $field_values[$params[$i]])) {
+	foreach ($params as $par_value) {
+		if (!($field_values[$params[0]] === $field_values[$par_value])) {
 			$form['error'] = strtr('ERROR -- @name IS WRONG', [
-				'@name' => $form['fields'][$params[$i]]['label']
+				'@name' => $form['fields'][$par_value]['label']
 			]);
 			return false;
 		}
@@ -94,6 +79,15 @@ function validate_field_number(string $field_value, array &$field): bool
 {
 	if (!(is_numeric($field_value))) {
 		$field['error'] = 'THAT\'S NOT A NUMBER FOOL';
+		return false;
+	}
+	return true;
+}
+
+function validate_select(string $field_value, array &$field): bool
+{
+	if(!(array_key_exists($field_value, $field['options']))) {
+		$field['error'] = 'ERROR INPUT DOESN\'T EXIST';
 		return false;
 	}
 	return true;

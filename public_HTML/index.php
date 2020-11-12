@@ -7,102 +7,46 @@ $form = [
 		'method' => 'POST',
 	],
 	'fields' => [
-		// 	'text1' => [
-		// 		'label' => 'FIRST STRING',
-		// 		'type' => 'text',
-		// 		'validators' => [
-		// 			'validate_field_not_empty',
-		// 			'validate_text_length' => [
-		// 				'min' => 0,
-		// 				'max' => 5,
-		// 			],
-		// 		],
-		// 		'extras' => [
-		// 			'attr' => [
-		// 				'placeholder' => '',
-		// 				'class' => 'input-field',
-		// 			],
-		// 		],
-		// 	],
-		// 	'text2' => [
-		// 		'label' => 'SECOND STRING',
-		// 		'type' => 'text',
-		// 		'validators' => [
-		// 			'validate_field_not_empty',
-		// 			'validate_text_length' => [
-		// 				'min' => 0,
-		// 				'max' => 5,
-		// 			],
-		// 		],
-		// 		'extras' => [
-		// 			'attr' => [
-		// 				'placeholder' => '',
-		// 				'class' => 'input-field',
-		// 			],
-		// 		],
-		// 	],
-		// 	'text3' => [
-		// 		'label' => 'THIRD STRING',
-		// 		'type' => 'text',
-		// 		'validators' => [
-		// 			'validate_field_not_empty',
-		// 			'validate_text_length' => [
-		// 				'min' => 0,
-		// 				'max' => 5,
-		// 			],
-		// 		],
-		// 		'extras' => [
-		// 			'attr' => [
-		// 				'placeholder' => '',
-		// 				'class' => 'input-field',
-		// 			],
-		// 		],
-		// 	],
-		// 	'phone_number' => [
-		// 		'label' => 'Enter phone number +3706XXXXXXX',
-		// 		'type' => 'text',
-		// 		'validators' => [
-		// 			'validate_field_not_empty',
-		// 			'validate_phone',
-		// 		],
-		// 		'extras' => [
-		// 			'attr' => [
-		// 				'placeholder' => '',
-		// 				'class' => 'input-field',
-		// 			],
-		// 		],
-		// 	],
-		'number' => [
-			'label' => 'Guess the root if you dare:',
-			'type' => 'text',
-			'value' => rand(4, 100),
-			'validators' => [],
+		'head_select' => [
+			'label' => 'Select yuor head',
+			'type' => 'select',
+			'value' => 'head1',
+			'options' => [
+				'head1' => 'Bird',
+				'head2' => 'Skull',
+				'head3' => 'Cow',
+			],
 			'extras' => [
 				'attr' => [
-					'class' => 'input-field grey',
-					'readonly' => 'readonly',
+					'class' => 'selector',
 				],
+			],
+			'validators' => [
+				'validate_select',
 			],
 		],
-		'answer' => [
-			'label' => 'Answer:',
-			'type' => 'text',
-			'validators' => [
-				'validate_field_not_empty',
-				'validate_field_number',
+		'body_select' => [
+			'label' => 'Select your body',
+			'type' => 'select',
+			'value' => 'body1',
+			'options' => [
+				'body1' => 'Muscle',
+				'body2' => 'Rider',
+				'body3' => 'Business',
 			],
 			'extras' => [
 				'attr' => [
-					'class' => 'input-field',
-					'placeholder' => 'your answer here:'
+					'class' => 'selector',
 				],
+			],
+			'validators' => [
+				'validate_select',
 			],
 		],
 	],
-
 	'buttons' => [
 		'submit' => [
-			'title' => 'Numbers?',
+			'title' => 'Give me my new body',
 			'type' => 'submit',
 			'extras' => [
 				'attr' => [
@@ -111,21 +55,15 @@ $form = [
 			],
 		],
 	],
-	// 'validators' => [
-	// 	'validate_field_match' => [
-	// 		'text1',
-	// 		'text2',
-	// 		'text3',
-	// 	]
-	// ]
-];
 
-var_dump($_POST);
+];
 
 $clean_inputs = get_clean_input($form);
 
 if ($clean_inputs) {
-	$message = validate_form($form, $clean_inputs) ? calc_diff($clean_inputs) : 'NOT NICE';
+	if (validate_form($form, $clean_inputs)) {
+		$body_parts = $clean_inputs;
+	}
 }
 
 ?>
@@ -135,14 +73,17 @@ if ($clean_inputs) {
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="style.css">
-	<title>Maffs</title>
+	<title>Selectorz</title>
 </head>
 
 <body>
-	<h1>quick maffs</h1>
 	<?php require ROOT . '/core/templates/form.tpl.php'; ?>
-	<?php if (isset($message)) : ?>
-		<p><?php print $message; ?></p>
+	<?php if ($body_parts ?? false) : ?>
+		<article class="body_box">
+			<?php foreach ($body_parts as $part => $option) : ?>
+				<div class="<?php print "$part $option"; ?>"></div>
+			<?php endforeach; ?>
+		</article>
 	<?php endif; ?>
 </body>
 

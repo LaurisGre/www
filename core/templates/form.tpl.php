@@ -1,8 +1,18 @@
 <form <?php print form_attr($form); ?>>
     <?php foreach ($form['fields'] as $input_name => $input) : ?>
         <label>
-            <?php print $input['label']; ?>
-            <input <?php print input_attr($input_name, $input); ?>>
+            <p class="label_text"><?php print $input['label']; ?></p>
+            <?php if ($input['type'] === 'select') : ?>
+                <select <?php print select_attr($input_name, $input); ?>>
+                    <?php foreach ($input['options'] as $option_name => $option_value) : ?>
+                        <option <?php print option_attr($option_name, $input); ?>>
+                            <?php print $option_value; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            <?php else : ?>
+                <input <?php print input_attr($input_name, $input); ?>>
+            <?php endif; ?>
             <?php if (isset($input['error'])) : ?>
                 <p class="error"><?php print $input['error']; ?></p>
             <?php endif; ?>
