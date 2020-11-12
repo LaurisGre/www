@@ -81,10 +81,19 @@ function validate_text_length(string $field_value, array &$field, array $params)
 	return true;
 }
 
-function validate_phone (string $field_value, array &$field): bool
+function validate_phone(string $field_value, array &$field): bool
 {
-	if(substr($field_value, 0, 5) !== '+3706' || strlen($field_value) !== 12) {
+	if (substr($field_value, 0, 5) !== '+3706' || strlen($field_value) !== 12) {
 		$field['error'] = 'WRONG NUMBER FOOL';
+		return false;
+	}
+	return true;
+}
+
+function validate_field_number(string $field_value, array &$field): bool
+{
+	if (!(is_numeric($field_value))) {
+		$field['error'] = 'THAT\'S NOT A NUMBER FOOL';
 		return false;
 	}
 	return true;

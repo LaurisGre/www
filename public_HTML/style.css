@@ -23,8 +23,16 @@ input, button{
     padding: 10px;
     margin: 10px 0;
     width: 100%;
+    border-radius: 10px;
+    outline: none;
 }
 
 .error {
     color: red;
+}
+
+.grey {
+    background-color: silver;
+    border: none;
+    text-align: center;
 }

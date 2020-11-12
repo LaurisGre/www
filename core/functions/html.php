@@ -3,7 +3,11 @@ function html_attr(array $attr): string
 {
 	$att_string = '';
 	foreach ($attr as $att_name => $att_value) {
-		$att_string .= "$att_name=\"$att_value\" ";
+		if($att_name === 'readonly') {
+			$att_string .= $att_name;
+		} else {
+			$att_string .= "$att_name=\"$att_value\" ";
+		}
 	}
 
 	return $att_string;
