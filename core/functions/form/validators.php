@@ -3,7 +3,7 @@
 function validate_field_not_empty(string $field_value, array &$field): bool
 {
 	if ($field_value === '') {
-		$field['error'] = 'ERROR TU DURNAS, PARAŠYK KAŽKĄ';
+		$field['error'] = 'ERROR TU DURNS, PARAŠYK KAŽKĄ';
 		return false;
 	}
 	return true;
@@ -34,7 +34,7 @@ function validate_age(string $field_value, array &$field): bool
 function validate_field_range(string $field_value, array &$field, array $params): bool
 {
 	if ($field_value < $params['min'] || $field_value > $params['max']) {
-		$field['error'] = 'ERROR TU DURNAS';
+		$field['error'] = 'ERROR TU DURNS';
 		return false;
 	}
 	return true;
@@ -44,7 +44,7 @@ function validate_field_match(array $field_values, array &$form, array $params):
 {
 	foreach ($params as $par_value) {
 		if (!($field_values[$params[0]] === $field_values[$par_value])) {
-			$form['error'] = strtr('ERROR -- @name IS WRONG', [
+			$form['error'] = strtr('ERROR -- @name IS INCORRECT', [
 				'@name' => $form['fields'][$par_value]['label']
 			]);
 			return false;
@@ -86,9 +86,19 @@ function validate_field_number(string $field_value, array &$field): bool
 
 function validate_select(string $field_value, array &$field): bool
 {
-	if(!(array_key_exists($field_value, $field['options']))) {
+	if (!(array_key_exists($field_value, $field['options']))) {
 		$field['error'] = 'ERROR INPUT DOESN\'T EXIST';
 		return false;
 	}
+	return true;
+}
+
+function validate_email(string $field_value, array &$field): bool
+{
+	if ((!strpos($field_value, '@') !== false) && (!strpos($field_value, '@') !== false)) {
+		$field['error'] = 'ERROR THAT\'S NOT A VALID EMAIL';
+		return false;
+	}
+
 	return true;
 }

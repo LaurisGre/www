@@ -10,6 +10,8 @@
                         </option>
                     <?php endforeach; ?>
                 </select>
+            <?php elseif ($input['type'] === 'textarea') : ?>
+                <textarea <?php print textarea_attr($input_name, $input); ?>><?php print $input['value']; ?></textarea>
             <?php else : ?>
                 <input <?php print input_attr($input_name, $input); ?>>
             <?php endif; ?>

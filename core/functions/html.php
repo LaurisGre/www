@@ -53,6 +53,17 @@ function option_attr(string $option_name, array $select): string
 	return html_attr($attributes);
 }
 
+function textarea_attr(string $textarea_name, array $textarea): string
+{
+	$attributes = [
+		'name' => $textarea_name,
+		'rows' => $textarea['rows'],
+		'cols' => $textarea['cols'],
+	] + ($textarea['extras']['attr'] ?? []);
+
+	return html_attr($attributes);
+}
+
 function button_attr(string $button_id, array $button): string
 {
 	$attributes = [
@@ -64,9 +75,10 @@ function button_attr(string $button_id, array $button): string
 	return html_attr($attributes);
 }
 
-function create_body(array $body_parts):array{
+function create_body(array $body_parts): array
+{
 	$parts = [];
-	foreach($body_parts as $part_name => $option) {
+	foreach ($body_parts as $part_name => $option) {
 		$parts[] = "$part_name $option";
 	}
 

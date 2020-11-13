@@ -45,14 +45,3 @@ function validate_form(array &$form, array $form_values): bool
 
 	return $valid;
 }
-
-function calc_diff(array $field_values): string
-{
-	$correct_root = sqrt($field_values['number']);
-	return strtr('The root of @num is @correct, you guessed @guess and missed by @percent %', [
-		'@num' => $field_values['number'],
-		'@correct' => number_format($correct_root, 2),
-		'@guess' => $field_values['answer'],
-		'@percent' => abs(number_format((100 - ($field_values['answer'] * 100 / $correct_root)), 2)) ,
-	]);
-}
