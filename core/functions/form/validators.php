@@ -95,10 +95,9 @@ function validate_select(string $field_value, array &$field): bool
 
 function validate_email(string $field_value, array &$field): bool
 {
-	if ((!strpos($field_value, '@') !== false) && (!strpos($field_value, '@') !== false)) {
+	if (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $field_value)) {
 		$field['error'] = 'ERROR THAT\'S NOT A VALID EMAIL';
 		return false;
 	}
-
 	return true;
 }

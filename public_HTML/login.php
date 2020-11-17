@@ -34,23 +34,10 @@ $form = [
 				],
 			],
 		],
-		'password2' => [
-			'label' => 'Password repeat',
-			'type' => 'password',
-			'value' => '',
-			'validators' => [
-				'validate_field_not_empty',
-			],
-			'extras' => [
-				'attr' => [
-					'placeholder' => 'repeat your password',
-				],
-			],
-		],
 	],
 	'buttons' => [
 		'submit' => [
-			'title' => 'Register',
+			'title' => 'Login',
 			'type' => 'submit',
 			'extras' => [
 				'attr' => [
@@ -60,10 +47,7 @@ $form = [
 		],
 	],
 	'validators' => [
-		'validate_field_match' => [
-			'password1',
-			'password2',
-		],
+		'validate_login',
 	],
 ];
 
@@ -71,13 +55,7 @@ $clean_inputs = get_clean_input($form);
 
 if ($clean_inputs) {
 	if (validate_form($form, $clean_inputs)) {
-		unset($clean_inputs['password2']);
-
-		if (validate_user_unique($clean_inputs, $form)) {
-			$data_arr = file_to_array(DB_FILE);
-			$data_arr[] = $clean_inputs;
-			array_to_file($data_arr,  DB_FILE);
-		}
+		login($clean_inputs);
 	}
 };
 
@@ -90,7 +68,7 @@ file_exists(DB_FILE) ? var_dump(file_to_array(DB_FILE)) : '';
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="style.css">
-	<title>Register</title>
+	<title>Login</title>
 </head>
 
 <body>
@@ -105,7 +83,6 @@ file_exists(DB_FILE) ? var_dump(file_to_array(DB_FILE)) : '';
 		</nav>
 	</header>
 	<main>
-		<h1>THIS IS THE REGISTER PAGE</h1>
 		<?php require ROOT . '/core/templates/form.tpl.php'; ?>
 	</main>
 </body>
