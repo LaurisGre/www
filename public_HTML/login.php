@@ -59,6 +59,8 @@ if ($clean_inputs) {
 	}
 };
 
+is_logged_in();
+
 file_exists(DB_FILE) ? var_dump(file_to_array(DB_FILE)) : '';
 
 ?>
@@ -79,6 +81,7 @@ file_exists(DB_FILE) ? var_dump(file_to_array(DB_FILE)) : '';
 				<li><a href="login.php">Login</a></li>
 				<li><a href="register.php">Register</a></li>
 				<li><a href="users.php">Users</a></li>
+				<li><a href="logout.php">Logout</a></li>
 			</ul>
 		</nav>
 	</header>

@@ -8,10 +8,12 @@ $visits = ($_COOKIE['visits'] ?? 0) + 1;
 setcookie('user_id', $user_id, time() + 3600, '/');
 setcookie('visits', $visits, time() + 3600, '/');
 
-$h1 = "Hi, this is your ID $user_id";
+// $h1 = "Hi, this is your ID $user_id";
 $h2 = "You visited $visits times";
 
-var_dump($_COOKIE);
+$h1 = is_logged_in() ?
+	'Welcome back, ' . $_SESSION['user_email'] :
+	'You\'re not logged in';
 
 ?>
 <!DOCTYPE html>
@@ -31,12 +33,14 @@ var_dump($_COOKIE);
 				<li><a href="login.php">Login</a></li>
 				<li><a href="register.php">Register</a></li>
 				<li><a href="users.php">Users</a></li>
+				<li><a href="logout.php">Logout</a></li>
 			</ul>
 		</nav>
 	</header>
 	<main>
 		<h1>THIS IS THE HOME PAGE</h1>
-		<?php print $h1; ?>
+		<?php print $h1 ?? ''; ?>
+		</br>
 		<?php print $h2; ?>
 	</main>
 </body>
