@@ -2,6 +2,8 @@
 
 require '../bootloader.php';
 
+$nav_array = nav();
+
 $form = [
 	'attr' => [
 		'method' => 'POST',
@@ -75,13 +77,12 @@ if ($clean_inputs) {
 
 		if (validate_user_unique($clean_inputs, $form)) {
 			$data_arr = file_to_array(DB_FILE);
-			$data_arr[] = $clean_inputs;
+			$data_arr['users'][] = $clean_inputs;
 			array_to_file($data_arr,  DB_FILE);
+			header("Location:login.php");
 		}
 	}
 };
-
-file_exists(DB_FILE) ? var_dump(file_to_array(DB_FILE)) : '';
 
 ?>
 <!DOCTYPE html>
@@ -94,19 +95,11 @@ file_exists(DB_FILE) ? var_dump(file_to_array(DB_FILE)) : '';
 </head>
 
 <body>
+	<h1>YOU CAN REGISTER HERE</h1>
 	<header>
-		<nav>
-			<ul>
-				<li><a href="index.php">Home</a></li>
-				<li><a href="login.php">Login</a></li>
-				<li><a href="register.php">Register</a></li>
-				<li><a href="users.php">Users</a></li>
-				<li><a href="logout.php">Logout</a></li>
-			</ul>
-		</nav>
+		<?php require ROOT . '/core/templates/nav.tpl.php'; ?>
 	</header>
 	<main>
-		<h1>THIS IS THE REGISTER PAGE</h1>
 		<?php require ROOT . '/core/templates/form.tpl.php'; ?>
 	</main>
 </body>

@@ -18,7 +18,7 @@ function is_logged_in(): bool
 {
 	if ($_SESSION) {
 		$data = file_to_array(DB_FILE) ?: [];
-		foreach ($data as $user) {
+		foreach ($data['users'] ?? [] as $user) {
 			if (
 				$user['email'] === $_SESSION['user_email'] &&
 				$user['password1'] === $_SESSION['user_password']

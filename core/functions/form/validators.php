@@ -75,9 +75,18 @@ function validate_phone(string $field_value, array &$field): bool
 	return true;
 }
 
-function validate_field_number(string $field_value, array &$field): bool
+function validate_field_is_numeric(string $field_value, array &$field): bool
 {
 	if (!(is_numeric($field_value))) {
+		$field['error'] = 'THAT\'S NOT A NUMBER FOOL';
+		return false;
+	}
+	return true;
+}
+
+function validate_field_is_integer(string $field_value, array &$field): bool
+{
+	if (!(is_integer($field_value))) {
 		$field['error'] = 'THAT\'S NOT A NUMBER FOOL';
 		return false;
 	}

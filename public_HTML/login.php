@@ -2,6 +2,8 @@
 
 require '../bootloader.php';
 
+$nav_array = nav();
+
 $form = [
 	'attr' => [
 		'method' => 'POST',
@@ -59,10 +61,6 @@ if ($clean_inputs) {
 	}
 };
 
-is_logged_in();
-
-file_exists(DB_FILE) ? var_dump(file_to_array(DB_FILE)) : '';
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,16 +72,9 @@ file_exists(DB_FILE) ? var_dump(file_to_array(DB_FILE)) : '';
 </head>
 
 <body>
+	<h1>YOU CAN LOGIN HERE</h1>
 	<header>
-		<nav>
-			<ul>
-				<li><a href="index.php">Home</a></li>
-				<li><a href="login.php">Login</a></li>
-				<li><a href="register.php">Register</a></li>
-				<li><a href="users.php">Users</a></li>
-				<li><a href="logout.php">Logout</a></li>
-			</ul>
-		</nav>
+		<?php require ROOT . '/core/templates/nav.tpl.php'; ?>
 	</header>
 	<main>
 		<?php require ROOT . '/core/templates/form.tpl.php'; ?>

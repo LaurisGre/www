@@ -2,18 +2,15 @@
 
 require '../bootloader.php';
 
+$nav_array = nav();
+
+$item_db = file_to_array(DB_FILE);
+
 $user_id = $_COOKIE['user_id'] ?? uniqid();
 $visits = ($_COOKIE['visits'] ?? 0) + 1;
 
 setcookie('user_id', $user_id, time() + 3600, '/');
 setcookie('visits', $visits, time() + 3600, '/');
-
-// $h1 = "Hi, this is your ID $user_id";
-$h2 = "You visited $visits times";
-
-$h1 = is_logged_in() ?
-	'Welcome back, ' . $_SESSION['user_email'] :
-	'You\'re not logged in';
 
 ?>
 <!DOCTYPE html>
@@ -26,22 +23,26 @@ $h1 = is_logged_in() ?
 </head>
 
 <body>
+	<h1>WELCOME TO AUTO-BBZ SHOP</h1>
 	<header>
-		<nav>
-			<ul>
-				<li><a href="index.php">Home</a></li>
-				<li><a href="login.php">Login</a></li>
-				<li><a href="register.php">Register</a></li>
-				<li><a href="users.php">Users</a></li>
-				<li><a href="logout.php">Logout</a></li>
-			</ul>
-		</nav>
+		<?php require ROOT . '/core/templates/nav.tpl.php'; ?>
 	</header>
 	<main>
-		<h1>THIS IS THE HOME PAGE</h1>
-		<?php print $h1 ?? ''; ?>
-		</br>
-		<?php print $h2; ?>
+		<div class="grid_box">
+			<?php foreach ($item_db['items'] as $item) : ?>
+				<div class="grid_card">
+					<?php foreach ($item as $param_name => $param_value) : ?>
+						<div>
+							<?php if ($param_name === 'img') : ?>
+								<img src="<?php print $param_value; ?>" alt="">
+							<?php else : ?>
+								<?php print ucfirst($param_name) . ": $param_value"; ?>
+							<?php endif; ?>
+						</div>
+					<?php endforeach; ?>
+				</div>
+			<?php endforeach; ?>
+		</div>
 	</main>
 </body>
 

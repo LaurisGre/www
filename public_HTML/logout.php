@@ -11,7 +11,7 @@ logout('login.php');
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="style.css">
-	<title>Register</title>
+	<title>Logout</title>
 </head>
 
 <body>
