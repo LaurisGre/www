@@ -3,195 +3,191 @@
 \*================================*/
 
 * {
-    padding: 0;
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
+  padding: 0;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    background-image: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/850d5888-f262-47d0-bb7b-34d03cd8d3ee/dblbdx1-7e2fafe2-0327-49e8-8305-786a9cce1e30.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvODUwZDU4ODgtZjI2Mi00N2QwLWJiN2ItMzRkMDNjZDhkM2VlXC9kYmxiZHgxLTdlMmZhZmUyLTAzMjctNDllOC04MzA1LTc4NmE5Y2NlMWUzMC5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.j6GrPIfxmQahIoVPKFPraU7BR91qnK74MoIDJIkr1SM');
-    background-size: fill;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/850d5888-f262-47d0-bb7b-34d03cd8d3ee/dblbdx1-7e2fafe2-0327-49e8-8305-786a9cce1e30.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOiIsImlzcyI6InVybjphcHA6Iiwib2JqIjpbW3sicGF0aCI6IlwvZlwvODUwZDU4ODgtZjI2Mi00N2QwLWJiN2ItMzRkMDNjZDhkM2VlXC9kYmxiZHgxLTdlMmZhZmUyLTAzMjctNDllOC04MzA1LTc4NmE5Y2NlMWUzMC5qcGcifV1dLCJhdWQiOlsidXJuOnNlcnZpY2U6ZmlsZS5kb3dubG9hZCJdfQ.j6GrPIfxmQahIoVPKFPraU7BR91qnK74MoIDJIkr1SM");
+  background-size: fill;
 }
 
 h1 {
-    color: white;
-    text-shadow: #000 0px 0px 5px;
+  color: white;
+  text-shadow: #000 0px 0px 5px;
 }
-
 
 /*================================*\
   # Navigation Settings
 \*================================*/
 
 header {
-    width: 400px;
-    margin: 20px 0;
+  width: 400px;
+  margin: 20px 0;
 }
 
 nav {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 ul {
-    width: 100%;
-    display: flex;
-    justify-content: space-evenly;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 li {
-    list-style: none;
-    position: relative;
-    overflow: hidden;
-    padding: 6px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+  list-style: none;
+  position: relative;
+  overflow: hidden;
+  padding: 6px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
 
 li:after {
-    content: '';
-    position: absolute;
-    bottom: -100%;
-    left: -0%;
-    height: 100%;
-    width: 100%;
-    border-bottom: 2px solid gold;
-    transition: .4s;
-    z-index: -1;
+  content: "";
+  position: absolute;
+  bottom: -100%;
+  left: -0%;
+  height: 100%;
+  width: 100%;
+  border-bottom: 2px solid gold;
+  transition: 0.4s;
+  z-index: -1;
 }
 
 li:hover:after {
-    bottom: 0;
-    box-shadow: 0 -20px 20px 5px gold;
+  bottom: 0;
+  box-shadow: 0 -20px 20px 5px gold;
 }
 
 a {
-    text-decoration: none;
-    color: white;
-    font-size: 20px;
-    font-weight: bold;
-    text-shadow: 2px 2px black;
+  text-decoration: none;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  text-shadow: 2px 2px black;
 }
-
 
 /*================================*\
   # Form Settings
 \*================================*/
 
 form {
-    display: flex;
-    flex-direction: column;
-    width: 400px;
-    padding: 40px;
-    border-radius: 30px;
-    border: 10px solid black;
-    background-image: linear-gradient(to left bottom, #e1d429, #ff913f, #fa5776);
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  padding: 40px;
+  border-radius: 30px;
+  border: 10px solid black;
+  background-image: linear-gradient(to left bottom, #e1d429, #ff913f, #fa5776);
 }
 
 input,
 button {
-    padding: 20px;
-    margin: 10px 0;
-    width: 100%;
-    border-radius: 10px;
-    background-color: gold;
-    box-sizing: border-box;
-    outline: none;
-    border: none;
+  padding: 20px;
+  margin: 10px 0;
+  width: 100%;
+  border-radius: 10px;
+  background-color: gold;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
 }
 
 .label_text {
-    color: white;
-    font-weight: bold;
-    margin: 10px 0;
+  color: white;
+  font-weight: bold;
+  margin: 10px 0;
 }
 
 .btn {
-    width: 100%;
-    margin: 20px 0;
-    box-shadow: 0 9px rgb(200, 170, 0);
-    font-weight: bold;
-    cursor: pointer;
+  width: 100%;
+  margin: 20px 0;
+  box-shadow: 0 9px rgb(200, 170, 0);
+  font-weight: bold;
+  cursor: pointer;
 }
 
 .btn:hover {
-    background-color: rgb(255, 220, 90);
-    box-shadow: 0 7px rgb(200, 170, 0);
-    transform: translateY(2px);
+  background-color: rgb(255, 220, 90);
+  box-shadow: 0 7px rgb(200, 170, 0);
+  transform: translateY(2px);
 }
 
 .btn:active {
-    background-color: gold;
-    box-shadow: 0 5px rgb(200, 170, 0);
-    transform: translateY(4px);
+  background-color: gold;
+  box-shadow: 0 5px rgb(200, 170, 0);
+  transform: translateY(4px);
 }
 
 .error {
-    color: white;
-    font-weight: bold;
-    text-decoration: underline;
+  color: white;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .txt_area {
-    padding: 10px;
+  padding: 10px;
 }
-
 
 /*================================*\
   # Grid Settings
 \*================================*/
 
 .grid_box {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
 }
 
 .grid_card {
-    padding: 30px 10px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
-    background-color: snow;
-    border: 5px solid black;
-    border-radius: 10px;
-    transition: .4s;
+  padding: 30px 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+  background-color: snow;
+  border: 5px solid black;
+  border-radius: 10px;
+  transition: 0.4s;
 }
 
 .grid_card:hover {
-    transform: translateY(-8px);
+  transform: translateY(-8px);
 }
 
 .grid_card :first-child,
 .grid_card :last-child {
-    grid-column: span 2;
-    justify-self: center;
+  grid-column: span 2;
+  justify-self: center;
 }
 
 .grid_card img {
-    max-height: 140px;
-    max-width: 200px;
-    margin: 0 auto;
-    border-radius: 5px;
+  max-height: 140px;
+  max-width: 200px;
+  margin: 0 auto;
+  border-radius: 5px;
 }
-
 
 /*================================*\
   # Add Post Settings
 \*================================*/
 
 .add_post label {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .add_post input {
-    width: 60%;
+  width: 60%;
 }

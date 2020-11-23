@@ -29,7 +29,7 @@ setcookie('visits', $visits, time() + 3600, '/');
 	</header>
 	<main>
 		<div class="grid_box">
-			<?php foreach ($item_db['items'] as $item) : ?>
+			<?php foreach ($item_db['items'] ?? [] as $item) : ?>
 				<div class="grid_card">
 					<?php foreach ($item as $param_name => $param_value) : ?>
 						<div>
