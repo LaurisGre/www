@@ -12,5 +12,6 @@ require 'core/functions/file.php';
 require 'core/functions/auth.php';
 require 'core/functions/form/core.php';
 require 'core/functions/form/validators.php';
+require 'core/classes/FileDB.php';
 require 'app/functions/form/validators.php';
 require 'app/functions/generators.php';
