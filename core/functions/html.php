@@ -8,16 +8,32 @@
  */
 function html_attr(array $attr): string
 {
-	$att_string = '';
-	foreach ($attr as $att_name => $att_value) {
-		if ($att_name === 'readonly') {
-			$att_string .= $att_name;
-		} else {
-			$att_string .= "$att_name=\"$att_value\" ";
-		}
-	}
+    $att_string = '';
+    foreach ($attr as $att_name => $att_value) {
+        if ($att_name === 'readonly') {
+            $att_string .= $att_name;
+        } else {
+            $att_string .= "$att_name=\"$att_value\" ";
+        }
+    }
 
-	return $att_string;
+    return $att_string;
+}
+
+/**
+ * Constructs HTML style attribute string
+ *
+ * @param array $attr
+ * @return string
+ */
+function style_attr(array $attr): string
+{
+    $att_string = '';
+    foreach ($attr as $att_name => $att_value) {
+        $att_string .= "$att_name: $att_value; ";
+    }
+
+    return $att_string;
 }
 
 /**
@@ -28,8 +44,8 @@ function html_attr(array $attr): string
  */
 function form_attr($form)
 {
-	$defaults = ['method' => 'POST'];
-	return html_attr(($form['attr'] ?? []) + $defaults);
+    $defaults = ['method' => 'POST'];
+    return html_attr(($form['attr'] ?? []) + $defaults);
 }
 
 /**
@@ -41,13 +57,13 @@ function form_attr($form)
  */
 function input_attr(string $field_name, array $field): string
 {
-	$attributes = [
-		'name' => $field_name,
-		'type' => $field['type'],
-		'value' => $field['value'] ?? ''
-	] + ($field['extras']['attr'] ?? []);
+    $attributes = [
+        'name' => $field_name,
+        'type' => $field['type'],
+        'value' => $field['value'] ?? ''
+    ] + ($field['extras']['attr'] ?? []);
 
-	return html_attr($attributes);
+    return html_attr($attributes);
 }
 
 /**
@@ -59,12 +75,12 @@ function input_attr(string $field_name, array $field): string
  */
 function select_attr(string $select_name, array $select_value): string
 {
-	$attributes = [
-		'name' => $select_name,
-		'value' => $select_value['value'],
-	] + ($select_value['extras']['attr'] ?? []);
+    $attributes = [
+        'name' => $select_name,
+        'value' => $select_value['value'],
+    ] + ($select_value['extras']['attr'] ?? []);
 
-	return html_attr($attributes);
+    return html_attr($attributes);
 }
 
 /**
@@ -76,15 +92,15 @@ function select_attr(string $select_name, array $select_value): string
  */
 function option_attr(string $option_name, array $select): string
 {
-	$attributes = [
-		'value' => $option_name,
-	];
+    $attributes = [
+        'value' => $option_name,
+    ];
 
-	if ($select['value'] === $option_name) {
-		$attributes['selected'] = 'selected';
-	}
+    if ($select['value'] === $option_name) {
+        $attributes['selected'] = 'selected';
+    }
 
-	return html_attr($attributes);
+    return html_attr($attributes);
 }
 
 /**
@@ -96,13 +112,13 @@ function option_attr(string $option_name, array $select): string
  */
 function textarea_attr(string $textarea_name, array $textarea): string
 {
-	$attributes = [
-		'name' => $textarea_name,
-		'rows' => $textarea['rows'],
-		'cols' => $textarea['cols'],
-	] + ($textarea['extras']['attr'] ?? []);
+    $attributes = [
+        'name' => $textarea_name,
+        'rows' => $textarea['rows'],
+        'cols' => $textarea['cols'],
+    ] + ($textarea['extras']['attr'] ?? []);
 
-	return html_attr($attributes);
+    return html_attr($attributes);
 }
 
 /**
@@ -114,11 +130,31 @@ function textarea_attr(string $textarea_name, array $textarea): string
  */
 function button_attr(string $button_id, array $button): string
 {
-	$attributes = [
-		'name' => 'action',
-		'type' => $button['type'] ?? 'submit',
-		'value' => $button_id,
-	] + ($button['extras']['attr'] ?? []);
+    $attributes = [
+        'name' => 'action',
+        'type' => $button['type'] ?? 'submit',
+        'value' => $button_id,
+    ] + ($button['extras']['attr'] ?? []);
 
-	return html_attr($attributes);
+    return html_attr($attributes);
+}
+
+/**
+ * Constructs HTML attribute string for the brick
+ *
+ * @param array $brick
+ * @return string
+ */
+function pixel_attr(array $brick): string
+{
+    $attributes = [
+        'class' => 'brick',
+        'style' => style_attr([
+            'background-color' => $brick['color'],
+            'top' => $brick['coord_x'] . 'px',
+            'left' => $brick['coord_y'] . 'px',
+        ]),
+    ];
+
+    return html_attr($attributes);
 }

@@ -11,7 +11,11 @@ function nav():array
 		'Home' => [
 			'path' => '../index.php',
 			'visible' => true,
-		],
+        ],
+        'My Bricks' => [
+            'path' => '../my.php',
+			'visible' => is_logged_in(),
+        ],
 		'Login' => [
 			'path' => '../login.php',
 			'visible' => !is_logged_in(),
@@ -21,7 +25,7 @@ function nav():array
 			'visible' => !is_logged_in(),
 		],
 		'Add' => [
-			'path' => '../admin/add.php',
+			'path' => '../add.php',
 			'visible' => is_logged_in(),
 		],
 		'Logout' => [

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Checks if the new user's email is already in the database
  *
@@ -39,4 +40,26 @@ function validate_login(array $inputs, array &$form): bool
     $form['error'] = 'ERROR WRONG LOGIN INFO';
 
     return false;
+}
+
+/**
+ * Checks if the given brick is not set in the database
+ *
+ * @param array $inputs
+ * @param array $form
+ * @return boolean
+ */
+function validate_brick_unique(array $inputs, array &$form): bool
+{
+    $db_array = new FileDB(DB_FILE);
+    $db_array->load();
+    unset($inputs['color']);
+    unset($inputs['poster']);
+
+    if ($db_array->getRowWhere('wall', $inputs)) {
+        $form['error'] = 'ERROR BRICK ALREADY EXISTS';
+        return false;
+    };
+
+    return true;
 }

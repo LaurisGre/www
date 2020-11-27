@@ -9,6 +9,6 @@ $db_array->insertRow('users', [
     'password' => 'placeholder'
 ]);
 
-$db_array->createTable('items');
+$db_array->createTable('wall');
 
 $db_array->save();

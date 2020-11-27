@@ -8,12 +8,6 @@ $db_array = new FileDB(DB_FILE);
 $db_array->load();
 $brick_array = $db_array->getData()['wall'];
 
-$user_id = $_COOKIE['user_id'] ?? uniqid();
-$visits = ($_COOKIE['visits'] ?? 0) + 1;
-
-setcookie('user_id', $user_id, time() + 3600, '/');
-setcookie('visits', $visits, time() + 3600, '/');
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,11 +15,11 @@ setcookie('visits', $visits, time() + 3600, '/');
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/media/style.css">
-    <title>Home</title>
+    <title>My bricks</title>
 </head>
 
 <body>
-    <h1>WELCOME TO THE GREAT POOP-WALL</h1>
+    <h1>THESE ARE MY BRICKS OF THE WALL</h1>
     <header>
         <?php require ROOT . '/core/templates/nav.tpl.php'; ?>
     </header>
@@ -36,9 +30,11 @@ setcookie('visits', $visits, time() + 3600, '/');
                     <div class="border_brick"></div>
                 <?php endfor; ?>
                 <?php foreach ($brick_array as $brick) : ?>
-                    <div>
-                        <span <?php print pixel_attr($brick); ?>></span>
-                    </div>
+                    <?php if ($brick['poster'] === $_SESSION['email']) : ?>
+                        <div>
+                            <span <?php print pixel_attr($brick); ?>></span>
+                        </div>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </div>
         </section>
