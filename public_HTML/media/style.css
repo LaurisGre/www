@@ -206,12 +206,12 @@ select {
 
 .poop_box {
   padding: 20px;
-  background-color: brown;
+  background-color: rgba(165, 42, 42, 0.7);
   border: 5px solid gold;
   border-radius: 20px;
 }
 
-.POOP-WALL {
+.poop_wall {
   height: 500px;
   width: 500px;
   position: relative;
@@ -223,10 +223,39 @@ select {
   height: 10px;
   width: 10px;
   position: absolute;
+  z-index: 1;
+}
+
+.brick:hover .brick_tooltip {
+  display: block;
 }
 
 .border_brick {
   height: 8px;
   width: 8px;
   border: 1px solid grey;
+  background-color: transparent;
+  transition: 2s;
+}
+
+.border_brick:hover {
+  background-color: white;
+  border-color: gold;
+  transition: 0.01s;
+}
+
+.brick_tooltip {
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 20px;
+  font-size: 10px;
+  width: 60px;
+  display: none;
+  position: absolute;
+  z-index: 2;
+}
+
+.border_brick:hover .brick_tooltip {
+  display: block;
 }

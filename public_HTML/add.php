@@ -48,7 +48,7 @@ $form = [
             ],
             'extras' => [
                 'attr' => [
-                    'placeholder' => 'X coordinate',
+                    'placeholder' => 'Y coordinate',
                     'min' => 0,
                     'max' => 490,
                     'step' => 10,

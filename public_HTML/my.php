@@ -25,14 +25,16 @@ $brick_array = $db_array->getData()['wall'];
     </header>
     <main>
         <section class="poop_box">
-            <div class="POOP-WALL">
-                <?php for ($i = 0; $i < 50 * 50; $i++) : ?>
-                    <div class="border_brick"></div>
-                <?php endfor; ?>
+            <div class="poop_wall">
+                <?php require ROOT . '/core/templates/wall.tpl.php'; ?>
                 <?php foreach ($brick_array as $brick) : ?>
                     <?php if ($brick['poster'] === $_SESSION['email']) : ?>
                         <div>
-                            <span <?php print pixel_attr($brick); ?>></span>
+                            <span <?php print pixel_attr($brick); ?>>
+                                <span class="brick_tooltip">
+                                    <?php print pixel_hint_text($brick); ?>
+                                </span>
+                            </span>
                         </div>
                     <?php endif; ?>
                 <?php endforeach; ?>

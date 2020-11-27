@@ -151,10 +151,20 @@ function pixel_attr(array $brick): string
         'class' => 'brick',
         'style' => style_attr([
             'background-color' => $brick['color'],
-            'top' => $brick['coord_x'] . 'px',
-            'left' => $brick['coord_y'] . 'px',
+            'top' => $brick['coord_y'] . 'px',
+            'left' => $brick['coord_x'] . 'px',
         ]),
     ];
 
     return html_attr($attributes);
+}
+
+function pixel_hint_text(array $brick): string
+{
+    $hint_string =
+        "X:{$brick['coord_x']} : Y:{$brick['coord_y']}" .
+        '</br>' .
+        "owner: {$brick['poster']}";
+
+    return $hint_string;
 }

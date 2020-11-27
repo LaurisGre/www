@@ -31,13 +31,13 @@ setcookie('visits', $visits, time() + 3600, '/');
     </header>
     <main>
         <section class="poop_box">
-            <div class="POOP-WALL">
-                <?php for ($i = 0; $i < 50 * 50; $i++) : ?>
-                    <div class="border_brick"></div>
-                <?php endfor; ?>
+            <div class="poop_wall">
+                <?php require ROOT . '/core/templates/wall.tpl.php'; ?>
                 <?php foreach ($brick_array as $brick) : ?>
-                    <div>
-                        <span <?php print pixel_attr($brick); ?>></span>
+                    <div <?php print pixel_attr($brick); ?>>
+                        <div class="brick_tooltip">
+                            <?php print pixel_hint_text($brick); ?>
+                        </div>
                     </div>
                 <?php endforeach; ?>
             </div>
