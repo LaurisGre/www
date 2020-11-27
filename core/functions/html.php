@@ -1,4 +1,11 @@
 <?php
+
+/**
+ * Constructs a string with the given HTML attributes
+ *
+ * @param array $attr
+ * @return string
+ */
 function html_attr(array $attr): string
 {
 	$att_string = '';
@@ -13,12 +20,25 @@ function html_attr(array $attr): string
 	return $att_string;
 }
 
+/**
+ * Constructs a string with the given HTML attributes for the form element
+ *
+ * @param [type] $form
+ * @return void
+ */
 function form_attr($form)
 {
 	$defaults = ['method' => 'POST'];
 	return html_attr(($form['attr'] ?? []) + $defaults);
 }
 
+/**
+ * Constructs a string with the given HTML attributes for the input element
+ *
+ * @param string $field_name
+ * @param array $field
+ * @return string
+ */
 function input_attr(string $field_name, array $field): string
 {
 	$attributes = [
@@ -30,6 +50,13 @@ function input_attr(string $field_name, array $field): string
 	return html_attr($attributes);
 }
 
+/**
+ * Constructs a string with the given HTML attributes for the select element
+ *
+ * @param string $select_name
+ * @param array $select_value
+ * @return string
+ */
 function select_attr(string $select_name, array $select_value): string
 {
 	$attributes = [
@@ -40,6 +67,13 @@ function select_attr(string $select_name, array $select_value): string
 	return html_attr($attributes);
 }
 
+/**
+ * Constructs a string with the given HTML attributes for the option element
+ *
+ * @param string $option_name
+ * @param array $select
+ * @return string
+ */
 function option_attr(string $option_name, array $select): string
 {
 	$attributes = [
@@ -53,6 +87,13 @@ function option_attr(string $option_name, array $select): string
 	return html_attr($attributes);
 }
 
+/**
+ * Constructs a string with the given HTML attributes for the textarea element
+ *
+ * @param string $textarea_name
+ * @param array $textarea
+ * @return string
+ */
 function textarea_attr(string $textarea_name, array $textarea): string
 {
 	$attributes = [
@@ -64,6 +105,13 @@ function textarea_attr(string $textarea_name, array $textarea): string
 	return html_attr($attributes);
 }
 
+/**
+ * Constructs a string with the given HTML attributes for the button element
+ *
+ * @param string $button_id
+ * @param array $button
+ * @return string
+ */
 function button_attr(string $button_id, array $button): string
 {
 	$attributes = [
@@ -73,14 +121,4 @@ function button_attr(string $button_id, array $button): string
 	] + ($button['extras']['attr'] ?? []);
 
 	return html_attr($attributes);
-}
-
-function create_body(array $body_parts): array
-{
-	$parts = [];
-	foreach ($body_parts as $part_name => $option) {
-		$parts[] = "$part_name $option";
-	}
-
-	return $parts;
 }

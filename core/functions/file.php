@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Converts the given file to a json file
+ *
+ * @param array $array
+ * @param string $file_name
+ * @return boolean
+ */
 function array_to_file(array $array, string $file_name): bool
 {
 	$string_array = json_encode($array);
@@ -8,6 +15,12 @@ function array_to_file(array $array, string $file_name): bool
 	return $bytes_written !== false;
 }
 
+/**
+ * Converts back from a json file in to an array
+ *
+ * @param string $file_name
+ * @return void
+ */
 function file_to_array(string $file_name)
 {
 	return

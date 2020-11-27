@@ -1,5 +1,11 @@
 <?php
 
+/**
+ * Sanitizes the inputs of the given form
+ *
+ * @param array $form
+ * @return 
+ */
 function get_clean_input(array $form)
 {
 	$parameters = [];
@@ -9,6 +15,13 @@ function get_clean_input(array $form)
 	return filter_input_array(INPUT_POST, $parameters);
 }
 
+/**
+ * Performs all of the designated forms validations
+ *
+ * @param array $form
+ * @param array $form_values
+ * @return boolean
+ */
 function validate_form(array &$form, array $form_values): bool
 {
 	$valid = true;

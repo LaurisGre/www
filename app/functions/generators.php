@@ -1,6 +1,11 @@
 <?php
 
-function nav()
+/**
+ * Generates a navigation array with the designated parameters
+ *
+ * @return array
+ */
+function nav():array
 {
 	$nav_array = [
 		'Home' => [

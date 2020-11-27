@@ -1,33 +1,42 @@
 <?php
-
+/**
+ * Checks if the new user's email is already in the database
+ *
+ * @param array $new_user
+ * @param array $form
+ * @return boolean
+ */
 function validate_user_unique(array $new_user, array &$form): bool
 {
-	$data = file_to_array(DB_FILE) ?: [];
+    $db_array = new FileDB(DB_FILE);
+    $db_array->load();
 
-	foreach ($data['users'] ?? [] as $user) {
-		var_dump($user);
-		if ($user['email'] === $new_user['email']) {
-			$form['error'] = 'ERROR USER WITH THAT EMAIL ALREADY EXISTS';
-			return false;
-		}
-	}
+    if ($db_array->getRowWhere('users', $new_user)) {
+        $form['error'] = 'ERROR USER WITH THAT EMAIL ALREADY EXISTS';
 
-	return true;
+        return false;
+    };
+
+    return true;
 }
 
+/**
+ * Checks if the given email-password combination exists in the database
+ *
+ * @param array $inputs
+ * @param array $form
+ * @return boolean
+ */
 function validate_login(array $inputs, array &$form): bool
 {
-	$data = file_to_array(DB_FILE) ?: [];
+    $db_array = new FileDB(DB_FILE);
+    $db_array->load();
 
-	foreach ($data['users'] ?? [] as $user) {
-		if (
-			$user['email'] === $inputs['email'] &&
-			$user['password1'] === $inputs['password1']
-		) {
-			return true;
-		}
-	}
+    if ($db_array->getRowWhere('users', $inputs)) {
+        return true;
+    };
 
-	$form['error'] = 'ERROR NO USER WITH THAT EMAIL FOUND';
-	return false;
+    $form['error'] = 'ERROR WRONG LOGIN INFO';
+
+    return false;
 }

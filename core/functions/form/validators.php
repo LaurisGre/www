@@ -1,5 +1,11 @@
 <?php
-
+/**
+ * Checks if the field is not empty
+ *
+ * @param string $field_value
+ * @param array $field
+ * @return boolean
+ */
 function validate_field_not_empty(string $field_value, array &$field): bool
 {
 	if ($field_value === '') {
@@ -9,6 +15,13 @@ function validate_field_not_empty(string $field_value, array &$field): bool
 	return true;
 }
 
+/**
+ * Checks if the field contains a space
+ *
+ * @param string $field_value
+ * @param array $field
+ * @return boolean
+ */
 function validate_space(string $field_value, array &$field): bool
 {
 	if (strpos(trim($field_value, ' '), ' ') === false) {
@@ -18,28 +31,14 @@ function validate_space(string $field_value, array &$field): bool
 	return true;
 }
 
-function validate_age(string $field_value, array &$field): bool
-{
-	if ($field_value < 18) {
-		$field['error'] = 'ERROR TU NENORMALUS, PER JAUNAS';
-		return false;
-	}
-	if ($field_value > 100) {
-		$field['error'] = 'ERROR TU NENORMALUS, PER SENAS';
-		return false;
-	}
-	return true;
-}
-
-function validate_field_range(string $field_value, array &$field, array $params): bool
-{
-	if ($field_value < $params['min'] || $field_value > $params['max']) {
-		$field['error'] = 'ERROR TU DURNS';
-		return false;
-	}
-	return true;
-}
-
+/**
+ * Checks if the given field values match
+ *
+ * @param array $field_values
+ * @param array $form
+ * @param array $params
+ * @return boolean
+ */
 function validate_field_match(array $field_values, array &$form, array $params): bool
 {
 	foreach ($params as $par_value) {
@@ -54,27 +53,13 @@ function validate_field_match(array $field_values, array &$form, array $params):
 	return true;
 }
 
-function validate_text_length(string $field_value, array &$field, array $params): bool
-{
-	if (strlen($field_value) < $params['min'] || strlen($field_value) > $params['max']) {
-		$field['error'] = strtr('ERROR STRING MUST BE NO LESS THAN @min AND NO MORE THAN @max', [
-			'@min' => $params['min'],
-			'@max' => $params['max'],
-		]);
-		return false;
-	}
-	return true;
-}
-
-function validate_phone(string $field_value, array &$field): bool
-{
-	if (substr($field_value, 0, 5) !== '+3706' || strlen($field_value) !== 12) {
-		$field['error'] = 'WRONG NUMBER FOOL';
-		return false;
-	}
-	return true;
-}
-
+/**
+ * Checks if the given value is numeric
+ *
+ * @param string $field_value
+ * @param array $field
+ * @return boolean
+ */
 function validate_field_is_numeric(string $field_value, array &$field): bool
 {
 	if (!(is_numeric($field_value))) {
@@ -84,6 +69,13 @@ function validate_field_is_numeric(string $field_value, array &$field): bool
 	return true;
 }
 
+/**
+ * Checks if the given value is an integer
+ *
+ * @param string $field_value
+ * @param array $field
+ * @return boolean
+ */
 function validate_field_is_integer(string $field_value, array &$field): bool
 {
 	if (!(is_integer($field_value))) {
@@ -93,15 +85,13 @@ function validate_field_is_integer(string $field_value, array &$field): bool
 	return true;
 }
 
-function validate_select(string $field_value, array &$field): bool
-{
-	if (!(array_key_exists($field_value, $field['options']))) {
-		$field['error'] = 'ERROR INPUT DOESN\'T EXIST';
-		return false;
-	}
-	return true;
-}
-
+/**
+ * Checks if the given value is in the correct email format
+ *
+ * @param string $field_value
+ * @param array $field
+ * @return boolean
+ */
 function validate_email(string $field_value, array &$field): bool
 {
 	if (!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix", $field_value)) {

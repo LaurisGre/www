@@ -5,6 +5,9 @@ require '../bootloader.php';
 $nav_array = nav();
 
 $item_db = file_to_array(DB_FILE);
+$db_array = new FileDB(DB_FILE);
+var_dump($db_array->load());
+var_dump($db_array->getData(DB_FILE));
 
 $user_id = $_COOKIE['user_id'] ?? uniqid();
 $visits = ($_COOKIE['visits'] ?? 0) + 1;
@@ -18,7 +21,7 @@ setcookie('visits', $visits, time() + 3600, '/');
 
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="/media/style.css">
 	<title>Home</title>
 </head>
 

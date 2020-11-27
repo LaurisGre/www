@@ -49,7 +49,7 @@ $form = [
 		],
 	],
 	'validators' => [
-		'validate_login',
+		'validate_login'
 	],
 ];
 
@@ -67,7 +67,7 @@ if ($clean_inputs) {
 
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="/media/style.css">
 	<title>Login</title>
 </head>
 
