@@ -1,18 +1,11 @@
 <?php
 
 require '../bootloader.php';
+use App\App;
 
 $nav_array = nav();
 
-$db_array = new FileDB(DB_FILE);
-$db_array->load();
-$brick_array = $db_array->getData()['wall'];
-
-$user_id = $_COOKIE['user_id'] ?? uniqid();
-$visits = ($_COOKIE['visits'] ?? 0) + 1;
-
-setcookie('user_id', $user_id, time() + 3600, '/');
-setcookie('visits', $visits, time() + 3600, '/');
+$brick_array = App::$db->getRowsWhere('wall');
 
 ?>
 <!DOCTYPE html>
@@ -33,7 +26,7 @@ setcookie('visits', $visits, time() + 3600, '/');
         <section class="poop_box">
             <div class="poop_wall">
                 <?php require ROOT . '/core/templates/wall.tpl.php'; ?>
-                <?php foreach ($brick_array as $brick) : ?>
+                <?php foreach ($brick_array ?? [] as $brick) : ?>
                     <div <?php print pixel_attr($brick); ?>>
                         <div class="brick_tooltip">
                             <?php print pixel_hint_text($brick); ?>

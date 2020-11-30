@@ -1,5 +1,7 @@
 <?php
 
+namespace Core;
+
 class FileDB
 {
 
@@ -102,11 +104,8 @@ class FileDB
     {
         if ($this->tableExists($table_name)) {
             unset($this->data[$table_name]);
-            var_dump('istryniau');
-
             return true;
         }
-        var_dump('nera tokio');
 
         return false;
     }
@@ -121,11 +120,8 @@ class FileDB
     {
         if ($this->tableExists($table_name)) {
             $this->data[$table_name] = [];
-            var_dump('istustinau');
-
             return true;
         }
-        var_dump('nera tokio');
 
         return false;
     }
@@ -222,7 +218,7 @@ class FileDB
     {
         $results = [];
 
-        foreach ($this->data[$table_name] as $r_index => $row) {
+        foreach ($this->data[$table_name] ?? [] as $r_index => $row) {
             $valid = true;
 
             foreach ($conditions as $c_index => $c_value) {
@@ -249,7 +245,7 @@ class FileDB
      */
     public function getRowWhere(string $table_name, array $conditions = [])
     {
-        foreach ($this->data[$table_name] as $row) {
+        foreach ($this->data[$table_name] ?? [] as $row) {
             $valid = true;
 
             foreach ($conditions as $c_index => $c_value) {

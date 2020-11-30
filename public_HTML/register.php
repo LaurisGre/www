@@ -1,6 +1,7 @@
 <?php
 
 require '../bootloader.php';
+use App\App;
 
 $nav_array = nav();
 
@@ -76,11 +77,8 @@ if ($clean_inputs) {
         unset($clean_inputs['password2']);
 
         if (validate_user_unique($clean_inputs, $form)) {
-            $db_array = new FileDB(DB_FILE);
-            $db_array->load();
-            $db_array->createTable('users');
-            $db_array->insertRow('users', $clean_inputs);
-            $db_array->save();
+            App::$db->createTable('users');
+            App::$db->insertRow('users', $clean_inputs);
             header("Location:login.php");
         }
     }

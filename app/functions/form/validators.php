@@ -1,5 +1,7 @@
 <?php
 
+use App\App;
+
 /**
  * Checks if the new user's email is already in the database
  *
@@ -9,10 +11,7 @@
  */
 function validate_user_unique(array $new_user, array &$form): bool
 {
-    $db_array = new FileDB(DB_FILE);
-    $db_array->load();
-
-    if ($db_array->getRowWhere('users', $new_user)) {
+    if (App::$db->getRowWhere('users', $new_user)) {
         $form['error'] = 'ERROR USER WITH THAT EMAIL ALREADY EXISTS';
 
         return false;
@@ -30,10 +29,7 @@ function validate_user_unique(array $new_user, array &$form): bool
  */
 function validate_login(array $inputs, array &$form): bool
 {
-    $db_array = new FileDB(DB_FILE);
-    $db_array->load();
-
-    if ($db_array->getRowWhere('users', $inputs)) {
+    if (App::$db->getRowWhere('users', $inputs)) {
         return true;
     };
 
@@ -51,12 +47,10 @@ function validate_login(array $inputs, array &$form): bool
  */
 function validate_brick_unique(array $inputs, array &$form): bool
 {
-    $db_array = new FileDB(DB_FILE);
-    $db_array->load();
     unset($inputs['color']);
     unset($inputs['poster']);
 
-    if ($db_array->getRowWhere('wall', $inputs)) {
+    if (App::$db->getRowWhere('wall', $inputs)) {
         $form['error'] = 'ERROR BRICK ALREADY EXISTS';
         return false;
     };

@@ -1,14 +1,15 @@
 <?php
 
 require '../bootloader.php';
-$db_array = new FileDB(DB_FILE);
+use App\App;
 
-$db_array->createTable('users');
-$db_array->insertRow('users', [
+// App::$db = new FileDB(DB_FILE);
+App::$db->dropTable('users');
+App::$db->createTable('users');
+App::$db->insertRow('users', [
     'email' => 'place@holder.com',
-    'password' => 'placeholder'
+    'password1' => 'placeholder'
 ]);
-
-$db_array->createTable('wall');
-
-$db_array->save();
+App::$db->dropTable('wall');
+App::$db->createTable('wall');
+App::$db->save();

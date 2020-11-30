@@ -1,5 +1,7 @@
 <?php
 
+use App\App;
+
 /**
  * Assigns the Session array with the users credentials
  *
@@ -34,10 +36,8 @@ function logout(string $redirect = null): void
 function is_logged_in(): bool
 {
     if ($_SESSION) {
-        $db_array = new FileDB(DB_FILE);
-        $db_array->load();
 
-        return (bool) $db_array->getRowWhere('users', $_SESSION);
+        return (bool) App::$db->getRowWhere('users', $_SESSION);
     }
 
     return false;

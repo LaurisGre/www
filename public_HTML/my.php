@@ -1,12 +1,11 @@
 <?php
 
 require '../bootloader.php';
+use App\App;
 
 $nav_array = nav();
 
-$db_array = new FileDB(DB_FILE);
-$db_array->load();
-$brick_array = $db_array->getData()['wall'];
+$brick_array = App::$db->getRowsWhere('wall');
 
 ?>
 <!DOCTYPE html>

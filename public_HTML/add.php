@@ -1,6 +1,7 @@
 <?php
 
 require '../bootloader.php';
+use App\App;
 
 $nav_array = nav();
 
@@ -95,11 +96,8 @@ $clean_inputs = get_clean_input($form);
 if ($clean_inputs) {
     if (validate_form($form, $clean_inputs)) {
         $clean_inputs['poster'] = $_SESSION['email'];
-        $db_array = new FileDB(DB_FILE);
-        $db_array->load();
-        $db_array->createTable('wall');
-        $db_array->insertRow('wall', $clean_inputs);
-        $db_array->save();
+        App::$db->createTable('wall');
+        App::$db->insertRow('wall', $clean_inputs);
         $message = 'New brick added successfully';
     }
 }
