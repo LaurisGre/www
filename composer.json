@@ -1,6 +1,6 @@
 {
     "name": "vendor-name/www",
-    "description": "",
+    "description": "description",
     "minimum-stability": "stable",
     "license": "proprietary",
     "authors": [

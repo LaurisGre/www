@@ -1,14 +1,14 @@
 <?php
 
-require '../bootloader.php';
 use App\App;
 
-// App::$db = new FileDB(DB_FILE);
+require '../bootloader.php';
+
 App::$db->dropTable('users');
 App::$db->createTable('users');
 App::$db->insertRow('users', [
     'email' => 'place@holder.com',
-    'password1' => 'placeholder'
+    'password' => 'placeholder'
 ]);
 App::$db->dropTable('wall');
 App::$db->createTable('wall');

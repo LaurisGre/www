@@ -1,7 +1,13 @@
 <?php
 
-require '../bootloader.php';
 use App\App;
+
+require '../bootloader.php';
+
+if (App::$session->getUser()) {
+    header('Location: /index.php');
+    exit();
+}
 
 $nav_array = nav();
 
@@ -24,7 +30,7 @@ $form = [
                 ],
             ],
         ],
-        'password1' => [
+        'password' => [
             'label' => 'Password',
             'type' => 'password',
             'value' => '',
@@ -37,7 +43,7 @@ $form = [
                 ],
             ],
         ],
-        'password2' => [
+        'password_repeat' => [
             'label' => 'Password repeat',
             'type' => 'password',
             'value' => '',
@@ -64,8 +70,8 @@ $form = [
     ],
     'validators' => [
         'validate_field_match' => [
-            'password1',
-            'password2',
+            'password',
+            'password_repeat',
         ],
     ],
 ];
@@ -74,7 +80,7 @@ $clean_inputs = get_clean_input($form);
 
 if ($clean_inputs) {
     if (validate_form($form, $clean_inputs)) {
-        unset($clean_inputs['password2']);
+        unset($clean_inputs['password_repeat']);
 
         if (validate_user_unique($clean_inputs, $form)) {
             App::$db->createTable('users');

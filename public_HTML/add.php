@@ -120,7 +120,7 @@ if ($clean_inputs) {
     <main>
         <?php require ROOT . '/core/templates/form.tpl.php'; ?>
         <?php if ($message ?? null) : ?>
-            <h2 class="add_message"><?php print $message ?? ''; ?></h2>
+            <p class="add_message"><?php print $message ?? ''; ?></p>
         <?php endif; ?>
     </main>
 </body>

@@ -1,38 +1,40 @@
 <?php
 
+use App\App;
+
 /**
  * Generates a navigation array with the designated parameters
  *
  * @return array
  */
-function nav():array
+function nav(): array
 {
-	$nav_array = [
-		'Home' => [
-			'path' => '../index.php',
-			'visible' => true,
+    $nav_array = [
+    	'Home' => [
+    		'path' => '../index.php',
+    		'visible' => true,
         ],
         'My Bricks' => [
             'path' => '../my.php',
-			'visible' => is_logged_in(),
+    		'visible' => App::$session->getUser(),
         ],
-		'Login' => [
-			'path' => '../login.php',
-			'visible' => !is_logged_in(),
-		],
-		'Register' => [
-			'path' => '../register.php',
-			'visible' => !is_logged_in(),
-		],
-		'Add' => [
-			'path' => '../add.php',
-			'visible' => is_logged_in(),
-		],
-		'Logout' => [
-			'path' => '../logout.php',
-			'visible' => is_logged_in(),
-		],
-	];
+    	'Login' => [
+    		'path' => '../login.php',
+    		'visible' => !App::$session->getUser(),
+    	],
+    	'Register' => [
+    		'path' => '../register.php',
+    		'visible' => !App::$session->getUser(),
+    	],
+    	'Add' => [
+    		'path' => '../add.php',
+    		'visible' => App::$session->getUser(),
+    	],
+    	'Logout' => [
+    		'path' => '../logout.php',
+    		'visible' => App::$session->getUser(),
+    	],
+    ];
 
-	return $nav_array;
+    return $nav_array;
 }

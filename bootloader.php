@@ -2,15 +2,12 @@
 
 use App\App;
 
-session_start();
-
 define('ROOT', __DIR__);
 define('DB_FILE', ROOT . '/app/data/db.json');
 
 // Core
 require 'core/functions/html.php';
 require 'core/functions/file.php';
-require 'core/functions/auth.php';
 require 'core/functions/form/core.php';
 require 'core/functions/form/validators.php';
 
@@ -18,7 +15,6 @@ require 'core/functions/form/validators.php';
 require 'app/functions/form/validators.php';
 require 'app/functions/generators.php';
 
-// Vendor
+// Composer classes
 require 'vendor/autoload.php';
-
 $app = new App();
