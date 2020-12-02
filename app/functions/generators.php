@@ -33,6 +33,14 @@ function nav(): array
     	'Logout' => [
     		'path' => '../logout.php',
     		'visible' => App::$session->getUser(),
+        ],
+        'Graph' => [
+    		'path' => '../graph/graph.php',
+    		'visible' => App::$session->getUser(),
+        ],
+        'Clear' => [
+    		'path' => '../graph/clear.php',
+    		'visible' => App::$session->getUser(),
     	],
     ];
 
