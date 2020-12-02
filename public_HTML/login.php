@@ -64,11 +64,14 @@ $clean_inputs = get_clean_input($form);
 
 if ($clean_inputs) {
     if (validate_form($form, $clean_inputs)) {
-        App::$session->login($clean_inputs['email'], $clean_inputs['password']);
-
-        header('Location: /index.php');
+        if (App::$session->login($clean_inputs['email'], $clean_inputs['password'])) {
+            App::$tracker->updateAnonUser($clean_inputs['email']);
+            header('Location: /index.php');
+        }
     }
 };
+
+// App::$tracker->clearHistory();
 
 ?>
 <!DOCTYPE html>

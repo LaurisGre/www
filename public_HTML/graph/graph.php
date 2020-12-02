@@ -9,32 +9,32 @@ $nav_array = nav();
 $axis_lines = [];
 
 // Print Axis
-for ($x = 0; $x < 50; $x++) {
-    $brick_X = [
-        'coord_x' => "{$x}0",
-        'coord_y' => 250,
-        'color' => 'black',
-        'poster' => 'axis'
-    ];
+// for ($x = 0; $x < 50; $x++) {
+//     $brick_X = [
+//         'coord_x' => "{$x}0",
+//         'coord_y' => 250,
+//         'color' => 'black',
+//         'poster' => 'axis'
+//     ];
 
-    $brick_Y = [
-        'coord_x' => 250,
-        'coord_y' => "{$x}0",
-        'color' => 'black',
-        'poster' => 'axis'
-    ];
+//     $brick_Y = [
+//         'coord_x' => 250,
+//         'coord_y' => "{$x}0",
+//         'color' => 'black',
+//         'poster' => 'axis'
+//     ];
 
-    App::$db->insertRow('wall', $brick_X);
-    App::$db->insertRow('wall', $brick_Y);
-}
+//     App::$db->insertRow('wall', $brick_X);
+//     App::$db->insertRow('wall', $brick_Y);
+// }
 
 // y = x**2 
-//print blocks according to the given equation y = x**2
+//print blocks according to the given equation
 
-// for ($x = -250; $x < 250; $x += 1) {
+// for ($x = -250; $x < 240; $x += 1) {
 
 //     $calculated_x = $x / 100;
-//     $calculated_y = $calculated_x * 2;
+//     $calculated_y = $calculated_x ** 2;
 
 //     $abs_y = 250 - $calculated_y * 100;
 //     $abs_x = abs(-250 - $x);
@@ -42,7 +42,7 @@ for ($x = 0; $x < 50; $x++) {
 //         $brick = [
 //             'coord_x' => $abs_x,
 //             'coord_y' => $abs_y,
-//             'color' => 'lawngreen',
+//             'color' => 'gold',
 //             'poster' => 'grapher'
 //         ];
 //         App::$db->insertRow('wall', $brick);
@@ -50,13 +50,34 @@ for ($x = 0; $x < 50; $x++) {
 // }
 
 // y = 1/x 
-//print blocks according to the given equation y = x**2
+// print blocks according to the given equation
 // for ($x = -250; $x < 250; $x += 1) {
 
 //     $calculated_x = $x / 100;
 //     if ($calculated_x !== 0) {
 //         $calculated_y = 1 / $calculated_x;
 //     }
+
+//     $abs_y = 250 - $calculated_y * 100;
+//     $abs_x = abs(-250 - $x);
+//     if ($abs_y >= 0 && $abs_y <= 490) {
+//         $brick = [
+//             'coord_x' => $abs_x,
+//             'coord_y' => round($abs_y, 2),
+//             'color' => 'red',
+//             'poster' => 'grapher'
+//         ];
+//         App::$db->insertRow('wall', $brick);
+//     }
+// }
+
+// y = sin(x) 
+//print blocks according to the given equation
+// for ($x = -250; $x < 240; $x += 1) {
+
+//     $calculated_x = $x / 100;
+
+//     $calculated_y = 1.5 * sin(deg2rad($calculated_x) * 200);
 
 //     $abs_y = 250 - $calculated_y * 100;
 //     $abs_x = abs(-250 - $x);
@@ -71,28 +92,7 @@ for ($x = 0; $x < 50; $x++) {
 //     }
 // }
 
-// y = sin(x) 
-//print blocks according to the given equation y = x**2
-for ($x = -250; $x < 250; $x += 1) {
-
-    $calculated_x = $x / 100;
-
-    $calculated_y = 1.5 * sin(deg2rad($calculated_x) * 200);
-
-    $abs_y = 250 - $calculated_y * 100;
-    $abs_x = abs(-250 - $x);
-    if ($abs_y >= 0 && $abs_y <= 490) {
-        $brick = [
-            'coord_x' => $abs_x,
-            'coord_y' => round($abs_y, 2),
-            'color' => 'lawngreen',
-            'poster' => 'grapher'
-        ];
-        App::$db->insertRow('wall', $brick);
-    }
-}
-
-$brick_array = App::$db->getRowsWhere('wall');
+// $brick_array = App::$db->getRowsWhere('wall');
 
 ?>
 <!DOCTYPE html>

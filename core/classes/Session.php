@@ -25,11 +25,11 @@ class Session
 
     public function login(string $email, string $password): bool
     {
-        $user = App::$db->getRowsWhere('users', [
+        $user = App::$db->getRowWhere('users', [
             'email' => $email,
             'password' => $password,
         ]);
-
+        
         if ($user) {
             $_SESSION['email'] = $email;
             $_SESSION['password'] = $password;

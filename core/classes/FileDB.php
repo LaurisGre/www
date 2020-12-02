@@ -162,10 +162,37 @@ class FileDB
         return array_key_exists($row_id, $this->data[$table_name]);
     }
 
+    /**
+     * Replaces the old row data in a given table with the given new data
+     *
+     * @param string $table_name
+     * @param [type] $row_id
+     * @param [type] $row
+     * @return boolean
+     */
     public function updateRow(string $table_name, $row_id, $row): bool
     {
         if ($this->rowExists($table_name, $row_id)) {
             $this->data[$table_name][$row_id] = $row;
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * Appends given data to the selected row in the selected table
+     *
+     * @param string $table_name
+     * @param [type] $row_id
+     * @param [type] $new_data
+     * @return boolean
+     */
+    public function appendRow(string $table_name, $row_id, $new_data): bool
+    {
+        if ($this->rowExists($table_name, $row_id)) {
+            $this->data[$table_name][$row_id] += $new_data;
 
             return true;
         }
@@ -257,6 +284,26 @@ class FileDB
 
             if ($valid) {
                 return $row;
+            }
+        }
+
+        return false;
+    }
+
+    public function deleteRows(string $table_name, array $conditions = [])
+    {
+        foreach ($this->data[$table_name] ?? [] as $row_index => $row) {
+            $valid = true;
+
+            foreach ($conditions as $c_index => $c_value) {
+                if ($c_value !== $row[$c_index]) {
+                    $valid = false;
+                    break;
+                }
+            }
+
+            if ($valid) {
+                $this->deleteRow($table_name, $row_index);
             }
         }
 
