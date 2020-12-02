@@ -6,93 +6,84 @@ require '../../bootloader.php';
 
 $nav_array = nav();
 
-$axis_lines = [];
+$form = [
+    'attr' => [
+        'method' => 'POST',
+    ],
+    'fields' => [
+        'equation' => [
+            'label' => 'Equation',
+            'type' => '',
+            'value' => '',
+            'validators' => [
+                'validate_field_not_empty',
+            ],
+            'extras' => [
+                'attr' => [
+                    'placeholder' => 'ex: y =  x**2',
+                ],
+            ],
+        ],
+    ],
+    'buttons' => [
+        'submit' => [
+            'title' => 'Graphicatuje panie',
+            'type' => 'submit',
+            'extras' => [
+                'attr' => [
+                    'class' => 'btn',
+                ],
+            ],
+        ],
+    ],
+    'validators' => [
+        'validate_login'
+    ],
+];
+
+//Prints bricks with given coords and color
+function print_bricks(float $x, float $y, string $color)
+{
+    return [
+        'coord_x' => $x,
+        'coord_y' => round($y, 2),
+        'color' => $color,
+        'poster' => 'grapher'
+    ];
+}
 
 // Print Axis
-// for ($x = 0; $x < 50; $x++) {
-//     $brick_X = [
-//         'coord_x' => "{$x}0",
-//         'coord_y' => 250,
-//         'color' => 'black',
-//         'poster' => 'axis'
-//     ];
+for ($x = 0; $x < 50; $x++) {
+    $brick_X = print_bricks($x * 10, 250, 'black');
+    $brick_Y = print_bricks(250, $x * 10, 'black');
 
-//     $brick_Y = [
-//         'coord_x' => 250,
-//         'coord_y' => "{$x}0",
-//         'color' => 'black',
-//         'poster' => 'axis'
-//     ];
+    App::$db->insertRow('wall', $brick_X);
+    App::$db->insertRow('wall', $brick_Y);
+}
 
-//     App::$db->insertRow('wall', $brick_X);
-//     App::$db->insertRow('wall', $brick_Y);
-// }
+//Prints blocks calculated from the given equation
+for ($x = -250; $x < 240; $x += 1) {
+    $calculated_x = $x / 100;
 
-// y = x**2 
-//print blocks according to the given equation
+    // y = x**2 
+    $calculated_y = $calculated_x ** 2;
 
-// for ($x = -250; $x < 240; $x += 1) {
+    // y = 1/x 
+    // if ($calculated_x !== 0) {
+    //     $calculated_y = 1 / $calculated_x;
+    // }
 
-//     $calculated_x = $x / 100;
-//     $calculated_y = $calculated_x ** 2;
+    // y = sin(x) 
+    // $calculated_y = 1 * sin(deg2rad($calculated_x) * 200);
 
-//     $abs_y = 250 - $calculated_y * 100;
-//     $abs_x = abs(-250 - $x);
-//     if ($abs_y >= 0 && $abs_y <= 490) {
-//         $brick = [
-//             'coord_x' => $abs_x,
-//             'coord_y' => $abs_y,
-//             'color' => 'gold',
-//             'poster' => 'grapher'
-//         ];
-//         App::$db->insertRow('wall', $brick);
-//     }
-// }
+    $abs_y = 250 - $calculated_y * 100;
+    $abs_x = abs(-250 - $x);
+    if ($abs_y >= 0 && $abs_y <= 490) {
+        App::$db->insertRow('wall', print_bricks($abs_x, $abs_y, 'deepskyblue'));
+    }
+}
 
-// y = 1/x 
-// print blocks according to the given equation
-// for ($x = -250; $x < 250; $x += 1) {
-
-//     $calculated_x = $x / 100;
-//     if ($calculated_x !== 0) {
-//         $calculated_y = 1 / $calculated_x;
-//     }
-
-//     $abs_y = 250 - $calculated_y * 100;
-//     $abs_x = abs(-250 - $x);
-//     if ($abs_y >= 0 && $abs_y <= 490) {
-//         $brick = [
-//             'coord_x' => $abs_x,
-//             'coord_y' => round($abs_y, 2),
-//             'color' => 'red',
-//             'poster' => 'grapher'
-//         ];
-//         App::$db->insertRow('wall', $brick);
-//     }
-// }
-
-// y = sin(x) 
-//print blocks according to the given equation
-// for ($x = -250; $x < 240; $x += 1) {
-
-//     $calculated_x = $x / 100;
-
-//     $calculated_y = 1.5 * sin(deg2rad($calculated_x) * 200);
-
-//     $abs_y = 250 - $calculated_y * 100;
-//     $abs_x = abs(-250 - $x);
-//     if ($abs_y >= 0 && $abs_y <= 490) {
-//         $brick = [
-//             'coord_x' => $abs_x,
-//             'coord_y' => round($abs_y, 2),
-//             'color' => 'lawngreen',
-//             'poster' => 'grapher'
-//         ];
-//         App::$db->insertRow('wall', $brick);
-//     }
-// }
-
-// $brick_array = App::$db->getRowsWhere('wall');
+$brick_array = App::$db->getRowsWhere('wall');
 
 ?>
 <!DOCTYPE html>
@@ -121,6 +112,9 @@ $axis_lines = [];
                     </div>
                 <?php endforeach; ?>
             </div>
+        </section>
+        <section>
+            <?php require ROOT . '/core/templates/form.tpl.php'; ?>
         </section>
     </main>
 </body>
