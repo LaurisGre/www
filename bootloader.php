@@ -10,13 +10,12 @@ date_default_timezone_set('Europe/Vilnius');
 // Core
 require 'core/functions/html.php';
 require 'core/functions/file.php';
-require 'core/functions/form/core.php';
 require 'core/functions/form/validators.php';
 
 // App
 require 'app/functions/form/validators.php';
-require 'app/functions/generators.php';
 
-// Composer classes
+// Composer 
 require 'vendor/autoload.php';
+
 $app = new App();

@@ -1,58 +1,15 @@
 <?php
 
 use App\App;
+use App\Views\BasePage;
+use App\Views\Forms\GraphForm;
+use Core\View;
 
 require '../../bootloader.php';
 
-$nav_array = nav();
+$form = new GraphForm();
 
-$form = [
-    'attr' => [
-        'method' => 'POST',
-    ],
-    'fields' => [
-        'equation' => [
-            'label' => 'Equation',
-            'type' => '',
-            'value' => '',
-            'validators' => [
-                'validate_field_not_empty',
-            ],
-            'extras' => [
-                'attr' => [
-                    'placeholder' => 'ex: y =  x**2',
-                ],
-            ],
-        ],
-    ],
-    'buttons' => [
-        'submit' => [
-            'title' => 'Graphicatuje panie',
-            'type' => 'submit',
-            'extras' => [
-                'attr' => [
-                    'class' => 'btn',
-                ],
-            ],
-        ],
-    ],
-    'validators' => [
-        'validate_login'
-    ],
-];
-
-//Prints bricks with given coords and color
-function print_bricks(float $x, float $y, string $color)
-{
-    return [
-        'coord_x' => $x,
-        'coord_y' => round($y, 2),
-        'color' => $color,
-        'poster' => 'grapher'
-    ];
-}
-
-// Print Axis
+// Print Axes
 for ($x = 0; $x < 50; $x++) {
     $brick_X = print_bricks($x * 10, 250, 'black');
     $brick_Y = print_bricks(250, $x * 10, 'black');
@@ -83,40 +40,25 @@ for ($x = -250; $x < 240; $x += 1) {
     }
 }
 
-$brick_array = App::$db->getRowsWhere('wall');
+//Prints bricks with given coords and color
+function print_bricks(float $x, float $y, string $color)
+{
+    return [
+        'coord_x' => $x,
+        'coord_y' => round($y, 2),
+        'color' => $color,
+        'poster' => 'grapher'
+    ];
+}
 
-?>
-<!DOCTYPE html>
-<html lang="en">
+$content = new View([
+    'title' => 'Graph',
+    'products' => App::$db->getRowsWhere('wall'),
+]);
 
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../media/style.css">
-    <title>Grapher</title>
-</head>
+$page = new BasePage([
+    'title' => 'Graph',
+    'content' => $content->render(ROOT . '/app/templates/content/index.tpl.php'),
+]);
 
-<body>
-    <h1>WELCOME TO THE GREAT POOP-GRAPHER</h1>
-    <header>
-        <?php require ROOT . '/core/templates/nav.tpl.php'; ?>
-    </header>
-    <main>
-        <section class="poop_box">
-            <div class="poop_wall">
-                <?php require ROOT . '/core/templates/wall.tpl.php'; ?>
-                <?php foreach ($brick_array ?? [] as $brick) : ?>
-                    <div <?php print pixel_attr($brick); ?>>
-                        <div class="brick_tooltip">
-                            <?php print pixel_hint_text($brick); ?>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
-            </div>
-        </section>
-        <section>
-            <?php require ROOT . '/core/templates/form.tpl.php'; ?>
-        </section>
-    </main>
-</body>
-
-</html>
+print $page->render();
