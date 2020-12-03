@@ -255,7 +255,3 @@ select {
 .brick:hover .brick_tooltip {
   display: block;
 }
-
-.border_brick:hover .brick_tooltip {
-  display: block;
-}
