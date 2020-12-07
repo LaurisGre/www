@@ -17,7 +17,6 @@ class EditTable extends Table
                 'X coord',
                 'Y coord',
                 'Color',
-                'poster',
                 'Edit',
                 'Delete',
             ],
@@ -42,6 +41,7 @@ class EditTable extends Table
                 $user_data[$b_index] = $brick;
             }
         }
+
         return $user_data;
     }
 }

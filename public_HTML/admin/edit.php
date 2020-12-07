@@ -27,7 +27,6 @@ if ($form->validate()) {
     header('Location: /admin/list.php');
 }
 
-
 $page = new BasePage([
     'title' => 'Edit your brick',
     'content' => $form->render(),

@@ -155,13 +155,8 @@ select {
 }
 
 .delete_form * {
-  margin: 0;
-  padding: 0;
   border: none;
-}
-
-.delete_form label {
-  visibility: hidden;
+  margin: 0;
 }
 
 /*================================*\
@@ -203,7 +198,7 @@ select {
 }
 
 /*================================*\
-  # Add/Edit Post Settings
+  # Add/Edit/Delete Post Settings
 \*================================*/
 
 .add_post label {
@@ -227,10 +222,13 @@ select {
 }
 
 .edit_link {
+  font-size: 18px;
   font-weight: bold;
+  border: none;
+  background: none;
   text-shadow: 1px 1px transparent;
   transition: 0.2s;
-  border: none;
+  cursor: pointer;
 }
 
 .edit_link:hover {
@@ -308,4 +306,5 @@ table {
 table * {
   border: 1px dotted black;
   padding: 5px;
+  text-align: center;
 }

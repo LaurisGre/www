@@ -96,4 +96,9 @@ class Form extends View
             }
         }
     }
+
+    public static function action()
+    {
+        return filter_input('action', FILTER_SANITIZE_SPECIAL_CHARS);
+    }
 }

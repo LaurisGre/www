@@ -14,9 +14,7 @@ class DeleteForm extends Form
             ],
             'fields' => [
                 'id' => [
-                    'label' => '',
-                    'type' => '',
-                    'value' => '',
+                    'type' => 'hidden',
                     'validators' => [
                         'validate_field_not_empty',
                     ],
@@ -28,13 +26,14 @@ class DeleteForm extends Form
                     'type' => 'submit',
                     'extras' => [
                         'attr' => [
-                            'class' => 'btn',
+                            'class' => 'edit_link',
                         ],
                     ],
                 ],
             ],
             'validators' => [
-                'validate_login'
+                'validate_row_exists',
+                'validate_user_delete',
             ],
             'attr' => [
                 'class' => 'delete_form',
