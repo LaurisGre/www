@@ -4,7 +4,12 @@ use App\App;
 use App\Views\BasePage;
 use App\Views\Forms\AddForm;
 
-require '../bootloader.php';
+require '../../bootloader.php';
+
+if (!App::$session->getUser()) {
+    header('Location: /index.php');
+    exit();
+}
 
 $form = new AddForm();
 

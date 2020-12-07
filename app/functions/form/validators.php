@@ -57,3 +57,20 @@ function validate_brick_unique(array $inputs, array &$form): bool
 
     return true;
 }
+
+/**
+ * Checks if the logged in user is allowed to edit the brick
+ *
+ * @param array $inputs
+ * @param array $form
+ * @return boolean
+ */
+function validate_user_edit(array $inputs, array &$form): bool
+{
+    if (App::$db->getRowById('wall', $_GET['id'])['poster'] !== $_SESSION['email']) {
+        $form['error'] = 'ERROR YOU\'RE NOT ALLOWED TO EDIT THAT';
+        return false;
+    }
+
+    return true;
+}

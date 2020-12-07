@@ -30,7 +30,7 @@ class Navigation extends View
                 'visible' => true,
             ],
             'My Bricks' => [
-                'path' => '../my.php',
+                'path' => '../admin/my.php',
                 'visible' => App::$session->getUser(),
             ],
             'Login' => [
@@ -42,7 +42,11 @@ class Navigation extends View
                 'visible' => !App::$session->getUser(),
             ],
             'Add' => [
-                'path' => '../add.php',
+                'path' => '../admin/add.php',
+                'visible' => App::$session->getUser(),
+            ],
+            'List' => [
+                'path' => '../admin/list.php',
                 'visible' => App::$session->getUser(),
             ],
             'Logout' => [

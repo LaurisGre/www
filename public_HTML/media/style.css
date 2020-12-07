@@ -27,6 +27,11 @@ h1 {
   margin-bottom: 20px;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
 /*================================*\
   # Navigation Settings
 \*================================*/
@@ -73,8 +78,7 @@ li:hover:after {
   box-shadow: 0 -20px 20px 5px brown;
 }
 
-a {
-  text-decoration: none;
+nav a {
   color: white;
   font-size: 20px;
   font-weight: bold;
@@ -144,6 +148,22 @@ select {
   padding: 10px;
 }
 
+.delete_form {
+  background: none;
+  width: auto;
+  border: none;
+}
+
+.delete_form * {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.delete_form label {
+  visibility: hidden;
+}
+
 /*================================*\
   # Grid Settings
 \*================================*/
@@ -183,7 +203,7 @@ select {
 }
 
 /*================================*\
-  # Add Post Settings
+  # Add/Edit Post Settings
 \*================================*/
 
 .add_post label {
@@ -200,6 +220,23 @@ select {
   text-align: center;
   color: white;
   font-weight: bold;
+}
+
+.readonly {
+  background-color: grey;
+}
+
+.edit_link {
+  font-weight: bold;
+  text-shadow: 1px 1px transparent;
+  transition: 0.2s;
+  border: none;
+}
+
+.edit_link:hover {
+  color: gold;
+  text-shadow: 1px 1px black;
+  transition: 0.2s;
 }
 
 /*================================*\
@@ -254,10 +291,21 @@ select {
   position: absolute;
 }
 
-.brick:hover .brick_tooltip {
+.brick:hover .brick_tooltip,
+.border_brick:hover .brick_tooltip {
   display: block;
 }
 
-.border_brick:hover .brick_tooltip {
-  display: block;
+/*================================*\
+  # Table Settings
+\*================================*/
+
+table {
+  border: 1px solid black;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+table * {
+  border: 1px dotted black;
+  padding: 5px;
 }

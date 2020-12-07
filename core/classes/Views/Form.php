@@ -32,7 +32,7 @@ class Form extends View
      */
     public function isSubmited(): bool
     {
-        return (bool)$this->values();
+        return (bool) $this->values();
     }
 
     /**
@@ -80,5 +80,20 @@ class Form extends View
         }
 
         return $valid;
+    }
+
+    /**
+     * Fills the form with the given data
+     *
+     * @param $new_values
+     * @return void
+     */
+    public function fill($new_values): void
+    {
+        foreach ($this->data['fields'] as $field_name => &$field_value) {
+            if (key_exists($field_name, $new_values)) {
+                $field_value['value'] = $new_values[$field_name];
+            }
+        }
     }
 }

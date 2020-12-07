@@ -4,9 +4,12 @@ use App\App;
 use App\Views\BasePage;
 use Core\View;
 
-require '../bootloader.php';
+require '../../bootloader.php';
 
-$h1 = 'WELCOME TO THE GREAT POOP-WALL';
+if (!App::$session->getUser()) {
+    header('Location: /index.php');
+    exit();
+}
 
 $content = new View([
     'title' => 'My Bricks',

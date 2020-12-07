@@ -18,7 +18,7 @@ class App
         self::$db->load();
         self::$session = new Session();
         self::$tracker = new Tracker();
-        self::$tracker->startTrack();
+        // self::$tracker->startTrack();
     }
 
     public function __destruct()
