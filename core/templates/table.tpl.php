@@ -5,7 +5,7 @@
             <th><?php print $header; ?></th>
         <?php endforeach; ?>
     </tr>
-    <?php foreach ($data['data'] as $datas) : ?>
+    <?php foreach ($data['data'] ?? [] as $datas) : ?>
         <tr>
             <?php foreach ($datas as $datum) : ?>
                 <td><?php print $datum; ?></td>

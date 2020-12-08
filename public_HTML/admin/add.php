@@ -1,27 +1,9 @@
 <?php
 
-use App\App;
-use App\Views\BasePage;
-use App\Views\Forms\AddForm;
+use App\Controllers\Admin\AddController;
 
 require '../../bootloader.php';
 
-if (!App::$session->getUser()) {
-    header('Location: /index.php');
-    exit();
-}
+$controller = new AddController();
 
-$form = new AddForm();
-
-if ($form->validate()) {
-    $clean_inputs = $form->values();
-    $clean_inputs['poster'] = $_SESSION['email'];
-    App::$db->insertRow('wall', $clean_inputs);
-}
-
-$page = new BasePage([
-    'title' => 'Add',
-    'content' => $form->render(),
-]);
-
-print $page->render();
+print $controller->index();
